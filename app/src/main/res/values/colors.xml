@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (C) 2008 ZXing authors
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -->
+<resources>
+  <color name="contents_text">#ff000000</color>
+  <color name="encode_view">#ffffffff</color>
+  <color name="possible_result_points">#c0ffbd21</color> <!-- Android standard ICS color -->
+  <color name="result_minor_text">#ffc0c0c0</color>
+  <color name="result_points">#c099cc00</color> <!-- Android standard ICS color -->
+  <color name="result_text">#ffffffff</color>
+  <color name="result_view">#b0000000</color>
+  <color name="status_text">#ffffffff</color>
+  <color name="transparent">#00000000</color>
+  <color name="viewfinder_laser">#ffcc0000</color> <!-- Android standard ICS color -->
+  <color name="viewfinder_mask">#60000000</color>
+  <color name="colorPrimary">#008577</color>
+  <color name="colorPrimaryDark">#00574B</color>
+  <color name="colorAccent">#D81B60</color>
+  <color name="item_pressed_true">#9C9C9C</color>
+  <color name="item_pressed_false">#E6E6E6</color>
+
+  <color name="colorPrimary2">#ffe6ff</color>
+  <color name="colorBtn">#9fdf9f</color>
+  <color name="colorBtn1">#b3ffff</color>
+  <color name="colorBtn2">#006bb3</color>
+  <color name="colorBtn3">#adad85</color>
+  <color name="colorBtn4">#d6d6c2</color>
+  <color name="colorTxtDisable">#555555</color>
+  <color name="colorWhite">#ffffff</color>
+  <color name="colorRed">#ff8000</color>
+  <color name="colorRed01">#77021D</color>
+  <color name="colorLabel">#ffe6cc</color>
+  <color name="colorGreen">#009900</color>
+
+  <color name="colorBackgroud">#28A0BE</color>
+  <color name="list_bg">#F9F9F9</color>
+  <color name="list_divider">#C4C4C3</color>
+
+  <color name="table_bg">#EBEBEB</color>
+  <color name="table_divider">#D0D0D0</color>
+  <color name="table_outside">#AAAAAA</color>
+
+
+  <color name="light_black">#504f4f</color>
+  <color name="black">#000000</color>
+  <color name="black2">#2952a3</color>
+  <color name="blue">#0737d4</color>
+</resources>

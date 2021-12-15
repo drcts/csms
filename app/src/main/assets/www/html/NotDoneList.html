@@ -1,0 +1,58 @@
+
+<!-- 미처리 현황 페이지 -->
+<div id="NotDoneList" data-role="page" >
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <!--<a href="#" data-rel="back" data-direction="reverse" data-icon="arrow-l" data-iconpos="left"></a>-->
+        <a href="../#Main" data-icon="arrow-l" data-iconpos="left"></a>
+        <h1></h1>
+    </div>
+    <div role="main" class="ui-content  main_content" style="margin-top:-10px;margin-bottom:25px;">
+        <div class="search-group"  style="margin-bottom:0px!important;">
+            <input id="txtRcvNo" style="width:80%;" type="text" data-clear-btn="true" placeholder="접수번호/고객/접수내용 검색"/>
+            <input id="btELSearch" type="button" value="검색" data-corners="false" />
+        </div>
+        <div class="search-group" style="display:none;">
+            <input id="txCustNm" style="width:80%;"  type="text" data-clear-btn="true" placeholder="고객명 검색"/>
+            <input id="btOrdSave" type="button" value="저장" data-corners="false"/>
+        </div>
+
+        <!--<ul id="NotDoneListview" data-role="listview"></ul>-->
+        <div class="search-group">
+            <table data-role="table" data-mode="columntoggle:none" class="ui-responsive " id="myTable" >
+                <thead>
+                    <tr>
+                        <th data-priority="1" >접수일</th>
+                        <th data-priority="2" >고객명/엔지니어</th>
+                    </tr>
+                    <tr>
+                        <th data-priority="1" >고객사</th>
+                        <th data-priority="2" >지역</th>
+                    </tr>
+                    <tr>
+                        <th data-priority="1" colspan="2">접수내용 <span id="pageInfo" style="color:cornflowerblue"></span></th>
+                    </tr>
+                </thead>
+                <tbody id="NotDoneListview">
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li><a   href="../#Main" data-icon="home">Home</a></li>
+                <li><a     href="#" onclick="goNotDone();"  data-icon="employee">미처리현황</a></li>
+                <li><a     href="#" onclick="goDone();"   data-icon="attendance">처리완료현황</a></li>
+                <li><a     href="#" onclick="goAsst();"   data-icon="photo">자산실사</a></li>
+                <li><a   href="../#Login" data-icon="setting">로그아웃</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,454 @@
+
+/* 컬러값 */
+.ui-bar-a,
+.ui-bar-inherit{
+  background:#033f67;
+  border-color:#033f67;
+  color:#fff;
+  font-weight:bold
+}
+.ui-overlay-a,
+.ui-page-theme-a {
+  background: #f9f9f9; /* white */
+  border-color: #bbb; /* gray */
+  color: #333; /* black */
+}
+.ui-overlay-a {
+  background:black;
+}
+.ui-body-a,
+.ui-body-inherit {
+  background: #fff;
+  border-color: #3498db;
+  color: #333;
+}
+.ui-body-a {
+  border-width: 1px;
+  border-style: solid;
+}
+#Ready {
+  background-color: #00659E;
+}
+#Login {
+  background-color: #00659E; /* #3498DB */
+  position: relative;
+}
+.ui-page-theme-a a,
+.ui-bar-a a,
+.ui-body-a a,
+.ui-group-theme-a a {
+  color: #5dade2; /* right blue */
+  font-weight: bold;
+}
+.ui-page-theme-a a:visited,
+.ui-bar-a a:visited,
+.ui-body-a a:visited,
+.ui-group-theme-a a:visited,
+.ui-page-theme-a a:hover,
+.ui-bar-a a:hover,
+.ui-body-a a:hover,
+.ui-group-theme-a a:hover,
+.ui-page-theme-a a:active,
+.ui-bar-a a:active,
+.ui-body-a a:active,
+.ui-group-theme-a a:active {
+    color: #5dade2;
+}
+.ui-page-theme-a .ui-btn,
+.ui-bar-a .ui-btn,
+.ui-body-a .ui-btn,
+.ui-group-theme-a .ui-btn,
+.ui-btn.ui-btn-a,
+.ui-page-theme-a .ui-btn:visited,
+.ui-bar-a .ui-btn:visited,
+.ui-body-a .ui-btn:visited,
+.ui-group-theme-a .ui-btn:visited,
+.ui-btn.ui-btn-a:visited {
+    background: #3498db;
+    border-color: #3498db;
+    color: #fff;
+}
+.ui-page-theme-a .ui-btn:hover,
+.ui-bar-a .ui-btn:hover,
+.ui-body-a .ui-btn:hover,
+.ui-group-theme-a .ui-btn:hover,
+.ui-btn.ui-btn-a:hover {
+    background: #5dade2;
+    border-color: #5dade2;
+    color: #fff;
+}
+.ui-page-theme-a .ui-btn:active,
+.ui-bar-a .ui-btn:active,
+.ui-body-a .ui-btn:active,
+.ui-group-theme-a .ui-btn:active,
+.ui-btn.ui-btn-a:active {
+    background: #5dade2;
+    border-color: #5dade2;
+    color: #fff;
+}
+.ui-page-theme-a .ui-btn.ui-btn-active,
+.ui-bar-a .ui-btn.ui-btn-active,
+.ui-body-a .ui-btn.ui-btn-active,
+.ui-group-theme-a .ui-btn.ui-btn-active,
+.ui-btn.ui-btn-a.ui-btn-active,
+.ui-page-theme-a .ui-flipswitch-active,
+.ui-bar-a .ui-flipswitch-active,
+.ui-body-a .ui-flipswitch-active,
+.ui-group-theme-a .ui-flipswitch-active,
+.ui-flipswitch.ui-bar-a.ui-flipswitch-active,
+.ui-slider-track.ui-body-a .ui-btn-active {
+    background-color: #5dade2;
+    border-color: #5dade2;
+    color: #fff;
+}
+
+
+
+
+
+.ui-checkbox > .ui-btn{
+    color: #BFC9CA;
+    background:transparent;
+    border: none;
+    padding-bottom: 0;
+    padding-top: 0;
+    font-size:0.8em;
+}
+.ui-checkbox > .ui-btn:hover,
+.ui-checkbox > .ui-btn.ui-btn-active {
+    color: #3498DB;
+    background:transparent;
+}
+.ui-checkbox-on:after,
+.ui-btn.ui-checkbox-on.ui-btn-a:after {
+    border-color: #3498db;
+    color: #fff;
+}
+.ui-radio-on:after,
+.ui-btn.ui-radio-on.ui-btn-a:after {
+    background-color: #3498db;
+    color: #fff;
+}
+
+::-webkit-input-placeholder,
+::-moz-placeholder {
+    color:    gray;
+}
+
+/* 헤더 바 */
+.ui-header > .ui-btn {
+  background: transparent;
+  border:0;
+  height: 18px;
+  top:0;
+}
+.ui-header > .ui-btn:hover {
+  background: transparent;
+}
+.ui-header > .ui-btn-icon-left:after {
+  background-color: #246b9a;
+}
+/* 헤더 바 : 수정버튼들 */
+.ui-header > .ui-bt-bar.ui-btn {
+  height: 24px;
+  line-height:24px;
+}
+.ui-header > .ui-bt-bar.ui-btn:hover {
+  background: #00659E;
+}
+
+/* 푸터 바*/
+.ui-footer > .ui-navbar .ui-btn {
+  background:#033f67;
+  border-color: #033f67;
+}
+.ui-footer > .ui-navbar .ui-btn:hover,
+.ui-footer > .ui-navbar .ui-btn.ui-btn-active {
+  background:#00659e;
+  border-color: #00659e;
+}
+
+.ui-footer {
+    text-align: center;
+    color: #747474;
+    height: 47px;
+}
+.ui-footer-copyright {
+  width:100%;
+  font-weight: normal;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ui-checkbox > input {
+  display:none;
+}
+
+
+
+
+/* AutoLogin  버튼 */
+.ui-flipswitch.ui-shadow-inset.ui-bar-inherit {
+  background:#3498DB;
+  border-color:#3498DB;
+}
+
+/* 팝업 */
+.ui-popup-container {
+  width:80%;
+}
+.ui-popup-content {
+  padding:0.5em;
+}
+.ui-popup > .ui-listview {
+  padding:.5em;
+}
+.ui-popup > .ui-controlgroup > legend,
+.ui-popup > .ui-controlgroup > .ui-controlgroup-label > legend,
+.ui-popup-content legend,
+.ui-popup > .ui-listview > legend {
+  color:white;
+  margin: 0.5em 0;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.ui-popup-content > .ui-controlgroup > legend {
+  margin: 0 0;
+}
+.ui-popup > .ui-listview > .ui-btn {
+  border:0;
+}
+.ui-popup > .ui-controlgroup > .ui-controlgroup-label{
+  padding:0 1em;
+}
+.ui-popup,
+.ui-popup-container > .ui-popup.ui-body-inherit,
+.ui-popup > .ui-listview > li > .ui-btn {
+  background-color: #3498DB;
+}
+
+.ui-popup > .ui-listview > li,
+.ui-popup > .ui-controlgroup > .ui-radio,
+.ui-popup > .ui-popup-content > .ui-controlgroup > .ui-radio {
+  border-bottom:1px solid #B4D2E3;
+}
+.ui-popup > .ui-controlgroup > .ui-controlgroup-controls > .ui-radio {
+  border-bottom:1px solid white;
+}
+
+
+/*테이블*/
+table{
+    border-spacing:0px;
+    width: 100%;
+}
+thead th {
+    background-color: #cce6ff;
+    text-align: center;
+    border: 1px solid #eee !important;
+}
+tbody tr {
+    border-bottom: 1px solid #003366 !important;
+}
+
+tbody td {
+    border: 1px solid #eee !important;
+}
+
+/* 버튼 사이즈 */
+#safetyNewEmployee,
+#employeeCompany,
+#employeeGroup {
+  height: 21px;
+}
+/* Footer 네비게이션 아이콘 */
+.ui-navbar li .ui-btn {
+  font-size: 10px;
+  padding-top:33px;
+}
+.ui-icon-home:after,
+.ui-icon-employee:after,
+.ui-icon-attendance:after,
+.ui-icon-photo:after,
+.ui-icon-safety:after,
+.ui-icon-setting:after {
+    width: 28px;
+    height: 28px;
+    margin-left: -14px;
+}
+
+.ui-icon-home:after       { background-image: url(../img/icon-tab-1.png); background-size:contain; background-color: transparent; }
+.ui-icon-employee:after   { background-image: url(../img/icon-notice-new.png); background-size:contain; background-color: transparent; }
+.ui-icon-attendance:after { background-image: url(../img/icon-main-menu-6.png); background-size:contain; background-color: transparent; }
+.ui-icon-photo:after      { background-image: url(../img/icon-main-menu-3.png); background-size:contain; background-color: transparent; }
+.ui-icon-safety:after     { background-image: url(../img/icon-tab-4.png); background-size:contain; background-color: transparent; }
+.ui-icon-setting:after    { background-image: url(../img/icon-main-menu-0.png); background-size:contain; background-color: transparent; }
+
+/* 입력창과 검색버튼 영역 */
+.search-group{
+  width:100%;
+  margin-bottom:1em;
+  border: 1px solid #eee !important;
+  text-align: center;
+  display: table;
+}
+.search-group:hover {
+  border: 1px solid #3498DB !important;
+}
+.search-group > .ui-input-text,
+.search-group > .ui-btn {
+  display: table-cell;
+  vertical-align: middle;
+}
+.search-group > .ui-input-text {
+  border: 0 !important;
+}
+.search-group > .ui-btn {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+
+
+/* 사진 */
+IMG[src=''],
+IMG:not([src]) {
+  opacity:0;
+}
+.thumbnail {
+    min-height: 180px;
+    padding:4px;
+    margin-bottom: 20px;
+    border: 1px solid #DDD; /* gray */
+    border-radius: 4px;
+    background-color: white; /* white */
+    text-align: center;
+    overflow: hidden;
+}
+.ui-icon-thumbnail {
+    background:url(../img/icon-photo.png) no-repeat;
+    background-size: 60px 50px;
+    background-position:center center;
+}
+.thumbnail > img {
+    display:block;
+    width: 100%;
+    min-height: 180px;
+    max-height: 300px;
+    vertical-align: middle;
+    margin-left: auto;
+    margin-right: auto;
+}
+.thumbnail-fix > img {
+    width:auto;
+    height: 180px;
+    background-size: contain;
+}
+
+
+/* 입력박스와 같이 존재하는 영역 (등록자, 등록일자 등) */
+.ui-label {
+  display: table;
+  margin-bottom: 1px;
+  width: 100%;
+}
+.ui-label > .ui-label-title,
+.ui-label > .ui-input-text,
+.ui-label > .ui-btn {
+  display: table-cell;
+}
+.ui-label > .ui-label-title {
+  width: 100px;
+  vertical-align: middle;
+  text-align: left;
+}
+.ui-label-title {
+  color: #959595;
+}
+.ui-label > .ui-label-title {
+  height:100%;
+}
+.ui-label > .ui-input-text {
+  margin-top:0;
+  margin-bottom:0;
+}
+
+
+.ui-listview > .ui-li-static {
+	padding: 0px 7px 0px 7px ;
+}
+
+
+
+
+
+
+
+.ui-page-theme-e a,
+.ui-bar-e a,
+.ui-body-e a,
+.ui-group-theme-e a {
+  color: #ffddcc; /* right blue */
+  font-weight: bold;
+}
+.ui-page-theme-e a:visited,
+.ui-bar-e a:visited,
+.ui-body-e a:visited,
+.ui-group-theme-e a:visited,
+.ui-page-theme-e a:hover,
+.ui-bar-e a:hover,
+.ui-body-e a:hover,
+.ui-group-theme-e a:hover,
+.ui-page-theme-e a:active,
+.ui-bar-e a:active,
+.ui-body-e a:active,
+.ui-group-theme-e a:active {
+    color: #ffddcc;
+}
+.ui-page-theme-e .ui-btn,
+.ui-bar-e .ui-btn,
+.ui-body-e .ui-btn,
+.ui-group-theme-e .ui-btn,
+.ui-btn.ui-btn-e,
+.ui-page-theme-e .ui-btn:visited,
+.ui-bar-e .ui-btn:visited,
+.ui-body-e .ui-btn:visited,
+.ui-group-theme-e .ui-btn:visited,
+.ui-btn.ui-btn-e:visited {
+    background: #3498db;
+    border-color: #3498db;
+    color: #fff;
+}
+.ui-page-theme-e .ui-btn:hover,
+.ui-bar-e .ui-btn:hover,
+.ui-body-e .ui-btn:hover,
+.ui-group-theme-e .ui-btn:hover,
+.ui-btn.ui-btn-e:hover {
+    background: #ffddcc;
+    border-color: #ffddcc;
+    color: #fff;
+}
+.ui-page-theme-e .ui-btn:active,
+.ui-bar-e .ui-btn:active,
+.ui-body-e .ui-btn:active,
+.ui-group-theme-e .ui-btn:active,
+.ui-btn.ui-btn-e:active {
+    background: #ffddcc;
+    border-color: #ffddcc;
+    color: #fff;
+}
+.ui-page-theme-e .ui-btn.ui-btn-ective,
+.ui-bar-e .ui-btn.ui-btn-ective,
+.ui-body-e .ui-btn.ui-btn-ective,
+.ui-group-theme-e .ui-btn.ui-btn-ective,
+.ui-btn.ui-btn-e.ui-btn-ective,
+.ui-page-theme-e .ui-flipswitch-ective,
+.ui-bar-e .ui-flipswitch-ective,
+.ui-body-e .ui-flipswitch-ective,
+.ui-group-theme-e .ui-flipswitch-ective,
+.ui-flipswitch.ui-bar-e.ui-flipswitch-ective,
+.ui-slider-track.ui-body-e .ui-btn-ective {
+    background-color: #ffddcc;
+    border-color: #ffddcc;
+    color: #fff;
+}

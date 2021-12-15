@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    tools:context=".PrintActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_weight="0"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:background="@color/colorPrimary"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="블루투스 프린터 선택"
+            android:textColor="@color/result_text"
+            android:textSize="20dp"
+            android:layout_gravity="center_horizontal"
+            ></TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+
+            <EditText
+                android:id="@+id/textTest"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:width="250dp"
+                android:height="40dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginLeft="10dp"
+                android:background="@color/result_text"
+                android:hint="테스트문구 입력"
+                android:textColorHint="@color/colorPrimaryDark"
+
+                android:layout_weight="5"
+                />
+
+            <Button android:id="@+id/btnBack"
+                android:layout_width="90dp"
+                android:layout_height="30dp"
+                android:text="Test Print"
+                android:background="@drawable/radius"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textSize="13dp"
+                android:textColor="@color/result_text"
+                >
+            </Button>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        >
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="검색"
+            android:textSize="15dp"
+            android:background="@color/colorBackgroud"
+            android:layout_margin="5dp"
+            android:textColor="@color/result_text"
+            />
+
+
+        <Button
+            android:id="@+id/btn_disconnect"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="연결끊기"
+            android:layout_margin="5dp"
+            android:background="@color/colorBackgroud"
+            android:textSize="15sp"
+            android:textColor="@color/result_text"
+            />
+
+        <Button
+            android:id="@+id/btn_print_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="CS모바일"
+            android:layout_margin="5dp"
+            android:background="@color/colorBackgroud"
+            android:textSize="15dp"
+            android:textColor="@color/result_text"
+        />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/result_text"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rl_device"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

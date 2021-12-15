@@ -1,0 +1,172 @@
+
+<!-- 요청내용 페이지 -->
+<div id="ReqCtnt" data-role="page">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <!--<a href="#" data-rel="back" data-direction="reverse" data-icon="arrow-l" data-iconpos="left"></a>-->
+        <a href="#" id="btnReqCtnt" data-icon="arrow-l" data-iconpos="left"></a>
+        <h1></h1>
+    </div>
+
+
+    <div id="ReqCtntTab"  data-role="content" data-theme="b" style="text-align:center; padding:2px 1px 2px 1px; ">
+        <fieldset data-role="controlgroup" data-type="horizontal">
+            <input name="procTab" id="retDev" value="0" type="radio" /><label for="retDev" id="lbl01">회수장비</label>
+            <input name="procTab" id="regPhoto" value="1" type="radio"/><label for="regPhoto" id="lbl02">관련사진</label>
+            <input name="procTab" id="sign" value="2" type="radio"/><label for="sign" id="lbl03">확인서명</label>
+            <input name="procTab" id="regProc" value="3" type="radio"/><label for="regProc" id="lbl04">처리등록</label>
+        </fieldset>
+    </div>
+
+
+    <div id="ReqCtntContent"  data-role="main" class="ui-content">
+
+        <div data-role="collapsible" data-inset="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-collapsed="false">
+            <h4>기본정보</h4>
+            <ul  data-role="listview" data-icon="false" >
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title">접수번호</div>
+                        <input id='rcvNo' type="text" readonly="readonly" data-corners="false"/>
+                    </div>
+                </li>
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title">접수일시</div>
+                        <input id='rcvDt' type="text" readonly="readonly" data-corners="false"/>
+                    </div>
+                </li>
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title">접수자</div>
+                        <input id='rcvNm' type="text" readonly="readonly" data-corners="false"/>
+                    </div>
+                </li>
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title">접수형태</div>
+                        <input id='rcvTpNm' type="text" readonly="readonly" data-corners="false"/>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+
+        <div data-role="collapsible" data-inset="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-collapsed="false">
+            <h4>고객정보</h4>
+            <ul  data-role="listview" data-icon="false" >
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title">회사명</div>
+                        <input id='ORG_NM' type="text" readonly="readonly" data-corners="false"/>
+                    </div>
+                </li>
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title"><button data-role="none" class="clipBtn" data-clipboard-action="copy" data-clipboard-target="#ADDR" >주소복사</button></div>
+                        <input id='ADDR' type="text" readonly="readonly" data-corners="false"/>
+                    </div>
+                </li>
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title">지점명</div>
+                        <input id='CLET_NM' type="text" readonly="readonly" data-corners="false"/>
+                    </div>
+                </li>
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title">고객명</div>
+                        <input id='CUST_NM' type="text" readonly="readonly" data-corners="false"/>
+                    </div>
+                </li>
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title">연락처</div>
+                        <input id='HP_NO' type="text" readonly="readonly" data-corners="false" />
+                        <img src="../img/call-24px.svg" id="btnCall" style="float:right;margin-bottom:-7px;" data-role="none"></img>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+
+        <div data-role="collapsible" data-inset="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+            <h4>장애정보</h4>
+            <ul  data-role="listview" data-icon="false" >
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title">접수내용</div>
+                        <textarea id='RCV_CNTS' placeholder='접수내용' style='width:99%;' readonly="readonly" data-corners="false"></textarea>
+                    </div>
+                </li>
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title">제품명</div>
+                        <input id='OTC_TYP_NM' type="text" readonly="readonly" data-corners="false"/>
+                    </div>
+                </li>
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title">장애분류</div>
+                        <input id='OTC_CD_NM' type="text" readonly="readonly" data-corners="false"/>
+                    </div>
+                </li>
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title">엔지니어</div>
+                        <input id='TRAN_NM' type="text" readonly="readonly" data-corners="false"/>
+                    </div>
+                </li>
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title">비고</div>
+                        <input id='ETC' type="text" readonly="readonly" data-corners="false"/>
+                    </div>
+                </li>
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title">이관</div>
+
+                        <a id="TRAN_ID" class="ui-btn ui-body-inherit ui-btn-icon-right ui-icon-carat-d" href="#tranPopup" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn">엔지니어선택</a>
+                        <div id="tranPopup" data-role="popup">
+                            <div class="ui-popup-content">
+                                <div class="search-group">
+                                    <input id="txtTranKey" type="text" data-clear-btn="true" placeholder="이름을 입력하세요." data-corners="false"/>
+                                    <input id="btTranKey" type="button" value="검색" data-corners="false"/>
+                                </div>
+                                <div id="tranPopupList" data-find-id="" ></div>
+                            </div>
+                        </div>
+
+                        <a id="btTranSave" class="ui-btn ui-mini" data-corners="true" data-theme="b" data-mini='true' >저장</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="ui-grid-b" >
+            <div class="ui-block-a">
+                <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="right" data-theme="b" id="Below01" class="ui-mini">방문약속</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="right" data-theme="b" id="Below02" class="ui-mini">자재요청</a>
+            </div>
+            <div class="ui-block-c">
+                <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="right" data-theme="b" id="Below03" class="ui-mini">사용자재</a>
+            </div>
+        </div>
+    </div>
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li><a   href="#Main" data-icon="home">Home</a></li>
+                <li><a     href="#" onclick="goNotDone();"  data-icon="employee" class="ui-btn-active ui-state-persist">미처리현황</a></li>
+                <li><a     href="#" onclick="goDone();"   data-icon="attendance">처리완료현황</a></li>
+                <li><a     href="#" onclick="goAsst();"   data-icon="photo">자산실사</a></li>
+                <li><a   href="#Login" data-icon="setting">로그아웃</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+

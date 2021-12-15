@@ -1,0 +1,38 @@
+
+
+<!--방문약속-->
+<div id="Visit" data-role="page">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <!--<a href="#" data-rel="back" data-direction="reverse" data-icon="arrow-l" data-iconpos="left"></a>-->
+        <a href="#" id="btnVisit" data-icon="arrow-l" data-iconpos="left"></a>
+        <h1></h1>
+    </div>
+
+    <div data-role="main" class="ui-content">
+
+        <div id="VisitCol" data-role="collapsible" data-inset="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-collapsed="false" data-theme="b">
+            <h4>
+                <span data-inline="true">방문약속</span>
+            </h4>
+            <ul  id="VisitList" data-role="listview" data-icon="false" >
+
+           </ul>
+        </div>
+
+    </div>
+        
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li><a   href="#Main" data-icon="home">Home</a></li>
+                <li><a   href="#" onclick="goNotDone();"  data-icon="employee" class="ui-btn-active ui-state-persist">미처리현황</a></li>
+                <li><a   href="#" onclick="goDone();"   data-icon="attendance">처리완료현황</a></li>
+                <li><a   href="#" onclick="goAsst();"   data-icon="photo">자산실사</a></li>
+                <li><a   href="#Login" data-icon="setting">로그아웃</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+

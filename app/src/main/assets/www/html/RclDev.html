@@ -1,0 +1,34 @@
+
+<!--회수장비-->
+<div id="RclDev" data-role="page">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <!--<a href="#" data-rel="back" data-direction="reverse" data-icon="arrow-l" data-iconpos="left"></a>-->
+        <a href="#" id="btnRclDev" data-icon="arrow-l" data-iconpos="left"></a>
+        <h1></h1>
+    </div>
+
+    <div data-role="main" class="ui-content">
+        <a href="#" id="btnScan" class="ui-btn ui-icon-camera ui-btn-icon-bottom" onclick="fn_scan();">바코드스캔</a>
+
+        <div data-role="collapsible" data-inset="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-collapsed="false" data-theme="b">
+            <h4>회수장비 S/N</h4>
+
+            <ul data-role="listview" data-inset="true" id="list_barcode">
+            </ul>
+        </div>
+
+    </div>
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li><a   href="#Main" data-icon="home">Home</a></li>
+                <li><a     href="#" onclick="goNotDone();"  data-icon="employee" class="ui-btn-active ui-state-persist">미처리현황</a></li>
+                <li><a     href="#" onclick="goDone();"   data-icon="attendance">처리완료현황</a></li>
+                <li><a     href="#" onclick="goAsst();"   data-icon="photo">자산실사</a></li>
+                <li><a   href="#Login" data-icon="setting">로그아웃</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+

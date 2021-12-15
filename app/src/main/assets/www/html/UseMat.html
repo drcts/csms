@@ -1,0 +1,61 @@
+
+
+<!--사용자재-->
+<div id="UseMat" data-role="page">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <!--<a href="#" data-rel="back" data-direction="reverse" data-icon="arrow-l" data-iconpos="left"></a>-->
+        <a href="#" id="btnUseMat" data-icon="arrow-l" data-iconpos="left"></a>
+        <h1></h1>
+    </div>
+
+    <div data-role="main" class="ui-content">
+        <a href="#" id="btnUseMatSave" class="ui-btn ui-icon-plus ui-btn-icon-bottom" onclick="saveUseMat();">저장</a>
+
+        <div id="MatCol" data-role="collapsible" data-inset="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-collapsed="false" data-theme="b">
+            <h4>
+                <span data-inline="true">사용자재</span>
+            </h4>
+            <ul data-role="listview" data-icon="false" >
+                <li>
+                    <div class='ui-grid-solo'>	<div class='ui-block-a'><textarea id='JAJAE_DESC' placeholder='처리내용' style='width:98%;' class='ui-mini' ></textarea></div></div>
+                    <div class='ui-grid-a'>
+                        <div class='ui-block-a'>
+                            <a id='MDLC_CD' class='ui-btn ui-body-inherit ' data-corners='false' href='#MDLC_CD_Popup' data-rel='popup' data-position-to='window' data-transition='pop' style='padding: .3em 1em!important;' >[ 품명 ]</a>
+                            <div data-role='popup' id='MDLC_CD_Popup' data-overlay-theme='c'>
+                                <fieldset data-role='controlgroup' data-iconpos='right'>
+                                    <legend>품명를(을) 선택하세요</legend>'
+                                    <input name='RDO_MDLC_CD' id='MDLC_CD_01' type='radio' value='M00001' data-grp='NTPC' abbr='노트북'><label for='MDLC_CD_01'>노트북</label>
+                                    <input name='RDO_MDLC_CD' id='MDLC_CD_02' type='radio' value='M00002' data-grp='DTPC' abbr='데스크탑' ><label for='MDLC_CD_02'>데스크탑</label>
+                                    <input name='RDO_MDLC_CD' id='MDLC_CD_03' type='radio' value='M00001' data-grp='JETC' abbr='기타' ><label for='MDLC_CD_03'>기타</label>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class='ui-block-b'>
+                            <a id='JAJAE_CD' class='ui-btn ui-body-inherit ' data-corners='false' href='#JAJAE_CD_Popup' data-rel='popup' data-position-to='window' data-transition='pop' style='padding: .3em 1em!important;' ></a>
+                            <div data-role='popup' id='JAJAE_CD_Popup' data-overlay-theme='c'></div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+
+            <!--기존자재내용 추가된-->
+            <ul  id="UseMatList" data-role="listview" data-icon="false" >
+            </ul>
+
+        </div>
+    </div>
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li><a   href="#Main" data-icon="home">Home</a></li>
+                <li><a     href="#" onclick="goNotDone();"  data-icon="employee" class="ui-btn-active ui-state-persist">미처리현황</a></li>
+                <li><a     href="#" onclick="goDone();"   data-icon="attendance">처리완료현황</a></li>
+                <li><a     href="#" onclick="goAsst();"   data-icon="photo">자산실사</a></li>
+                <li><a   href="#Login" data-icon="setting">로그아웃</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+

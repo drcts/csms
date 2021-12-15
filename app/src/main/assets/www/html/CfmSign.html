@@ -1,0 +1,38 @@
+
+<!--확인서명-->
+<div id="CfmSign" data-role="page">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <!--<a href="#" data-rel="back" data-direction="reverse" data-icon="arrow-l" data-iconpos="left"></a>-->
+        <a href="#" id="btnCfmSign" data-icon="arrow-l" data-iconpos="left"></a>
+        <h1></h1>
+    </div>
+
+    <div data-role="main" class="ui-content " style="text-align: center;" >
+        <div class="search-group">
+            <input id="txCfmNm" style="width:80%;"  type="text" data-clear-btn="true" placeholder="확인자"/>
+            <input id="btCfmSave" type="button" value="저장" data-corners="false"/>
+        </div>
+        <div id="cvs">
+            <canvas id="sig-canvas" width="-webkit-fill-available" height="200">
+                Canvas element not supported.
+            </canvas>
+        </div>
+
+        <a href="#" class="ui-btn ui-icon-delete ui-btn-icon-right" onclick="canvas_reset();" data-theme="b">지우기</a>
+
+        <img id="hidImg" src="" alt="" style="display:none;"/>
+
+    </div>
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li><a   href="#Main" data-icon="home">Home</a></li>
+                <li><a   href="#" onclick="goNotDone();"  data-icon="employee" class="ui-btn-active ui-state-persist">미처리현황</a></li>
+                <li><a   href="#" onclick="goDone();"   data-icon="attendance">처리완료현황</a></li>
+                <li><a     href="#" onclick="goAsst();"   data-icon="photo">자산실사</a></li>
+                <li><a   href="#Login" data-icon="setting">로그아웃</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
