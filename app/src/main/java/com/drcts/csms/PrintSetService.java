@@ -273,7 +273,7 @@ public class PrintSetService extends Service {
                 , 3, 0.0, 1.0F, (byte) 0x01
                 , 0, 0, false, "");
         mJCAPI.drawText(comNm, 13, 0, 130, 17
-                , 2, 0.0, 1.0F, (byte) 0x01
+                , 2.5, 0.0, 1.0F, (byte) 0x01
                 , 0, 0, false, "");
 
 
