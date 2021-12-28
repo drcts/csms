@@ -57,12 +57,16 @@ public class PrintSetService extends Service {
         mCallback = new Callback() {
             @Override
             public void onConnectSuccess(String s, int i) {
-                Toast.makeText(getApplicationContext(), "연결성공", Toast.LENGTH_SHORT).show();
+                try{
+                    Toast.makeText(getApplicationContext(), "연결성공", Toast.LENGTH_SHORT).show();
+                }catch (Exception e){}
             }
 
             @Override
             public void onDisConnect() {
-                Toast.makeText(getApplicationContext(), "연결이 종료되었습니다", Toast.LENGTH_SHORT).show();
+                try{
+                    Toast.makeText(getApplicationContext(), "연결이 종료되었습니다", Toast.LENGTH_SHORT).show();
+                }catch (Exception e){}
             }
 
             @Override
@@ -93,33 +97,43 @@ public class PrintSetService extends Service {
         mPrintCallback = new PrintCallback() {
             @Override
             public void onRibbonUsed(double v) {
-                Toast.makeText(getApplicationContext(), "onRibbonUsed...", Toast.LENGTH_SHORT);
+                try{
+                    Toast.makeText(getApplicationContext(), "onRibbonUsed...", Toast.LENGTH_SHORT);
+                }catch (Exception e){}
             }
 
             @Override
             public void onPrintProgress(int i) {
-                Toast.makeText(getApplicationContext(), "onPrintProgress...", Toast.LENGTH_SHORT);
+                try{
+                    Toast.makeText(getApplicationContext(), "onPrintProgress...", Toast.LENGTH_SHORT);
+                }catch (Exception e){}
             }
 
             @Override
             public void onPrintPageCompleted() {
-                mJCAPI.endJob();
-                Toast.makeText(getApplicationContext(), "인쇄성공", Toast.LENGTH_SHORT).show();
+                try{
+                    mJCAPI.endJob();
+                    Toast.makeText(getApplicationContext(), "인쇄성공", Toast.LENGTH_SHORT).show();
+                }catch (Exception e){}
             }
 
             @Override
             public void onPageNumberReceivingTimeout() {
-                Toast.makeText(getApplicationContext(), "onPageNumberReceivingTimeout...", Toast.LENGTH_SHORT);
+                try{
+                    Toast.makeText(getApplicationContext(), "onPageNumberReceivingTimeout...", Toast.LENGTH_SHORT);
+                }catch (Exception e){}
             }
 
             @Override
             public void onAbnormalResponse(final int i) {
                 Log.d("CSMS", "인쇄 테스트 - 인쇄취소 - 비정상콜백: " + i); //인쇄 테스트 - 인쇄취소 - 비정상콜백
-                if (i < 8) {
-                    mJCAPI.endJob();
-                }else {
-                    Toast.makeText(getApplicationContext(), "인쇄 실패에 대한 예외 코드:"+i, Toast.LENGTH_SHORT).show(); //인쇄 실패에 대한 예외 코드
-                }
+                try{
+                    if (i < 8) {
+                        mJCAPI.endJob();
+                    }else {
+                        Toast.makeText(getApplicationContext(), "인쇄 실패에 대한 예외 코드:"+i, Toast.LENGTH_SHORT).show(); //인쇄 실패에 대한 예외 코드
+                    }
+                }catch (Exception e){}
 
             }
         };
@@ -244,42 +258,62 @@ public class PrintSetService extends Service {
      * 打印标签 라벨인쇄
      */
     public static void printLabel(String barcode, String comNm) {
-        //        double width = Double.parseDouble(mLabelWidth);
-        //        double height = Double.parseDouble(mLabelHeight);
-        //        if (mPrintLabelType == 2) {
-        //            switch (mLabelOrientation) {
-        //                case 90:
-        //                case 270:
-        //                    width -= 5;
-        //                    break;
-        //                case 0:
-        //                case 180:
-        //                default:
-        //                    height -= 5;
-        //                    break;
-        //            }
-        //        }
-
         int itype=mJCAPI.getLabelType();
         Log.d("CSMS", "打印测试-取消打印-异常回调: itype - " + itype); //인쇄 테스트 취소 인쇄 비정상 콜백
-        //mJCAPI.startJob(60, 40, 0);
-        mJCAPI.startJob(40, 12, 90);//yskim
 
-        mJCAPI.startPage();
+        //프린터타입
+        int ptype = mJCAPI.getPrinterType();
+        //D11
+        if(ptype == 512){
+            mJCAPI.startJob(40, 12, 90);//B21
+            mJCAPI.startPage();
 
-        mJCAPI.drawQrCode(barcode,3,2,8,0);
+            mJCAPI.drawQrCode(barcode,3,2,8,0);
 
-        mJCAPI.drawText(barcode, 13, -6, 130, 20
-                , 3, 0.0, 1.0F, (byte) 0x01
-                , 0, 0, false, "");
-        mJCAPI.drawText(comNm, 13, 0, 130, 17
-                , 2.5, 0.0, 1.0F, (byte) 0x01
-                , 0, 0, false, "");
+            mJCAPI.drawText(barcode, 13, -6, 130, 20
+                    , 3, 0.0, 1.0F, (byte) 0x01
+                    , 0, 0, false, "");
+            mJCAPI.drawText(comNm, 13, 0, 130, 17
+                    , 2.5, 0.0, 1.0F, (byte) 0x01
+                    , 0, 0, false, "");
 
+            mJCAPI.endPage();
+            mJCAPI.commitJob(1, 1, 3,  mPrintCallback);
+        }
+        //B21
+        else if(ptype == 771){
+            mJCAPI.startJob(50, 30, 0);//B21
+            mJCAPI.startPage();
 
-        mJCAPI.endPage();
-        //mJCAPI.commitJob(1, 1, 3,  mPrintCallback);
-        mJCAPI.commitJob(1, 1, 3,  mPrintCallback);
+            mJCAPI.drawQrCode(barcode,2,7,14,0);
+
+            mJCAPI.drawText(barcode, 17, 2, 35, 18
+                    , 4, 0.0, 1.0F, (byte) 0x01
+                    , 0, 0, false, "");
+            mJCAPI.drawText(comNm, 17, 10, 35, 10
+                    , 3, 0.0, 1.0F, (byte) 0x01
+                    , 0, 0, false, "");
+
+            mJCAPI.endPage();
+            mJCAPI.commitJob(1, 1, 3,  mPrintCallback);
+        }
+        else{
+            mJCAPI.startJob(40, 12, 90);//B21
+            mJCAPI.startPage();
+
+            mJCAPI.drawQrCode(barcode,3,2,8,0);
+
+            mJCAPI.drawText(barcode, 13, -6, 130, 20
+                    , 3, 0.0, 1.0F, (byte) 0x01
+                    , 0, 0, false, "");
+            mJCAPI.drawText(comNm, 13, 0, 130, 17
+                    , 2.5, 0.0, 1.0F, (byte) 0x01
+                    , 0, 0, false, "");
+
+            mJCAPI.endPage();
+            mJCAPI.commitJob(1, 1, 3,  mPrintCallback);
+        }
+
 
 
 
