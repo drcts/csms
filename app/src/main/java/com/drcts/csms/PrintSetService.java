@@ -9,7 +9,9 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -25,10 +27,6 @@ public class PrintSetService extends Service {
      * B3S系列打印机打印接口 B3S시리즈 프린터인쇄 API 인스턴스
      */
     public static JCAPI mJCAPI = null;
-    /**
-     * 蓝牙适配器 핸드폰의 블루투스 어댑터
-     */
-    private BluetoothAdapter mBluetoothAdapter;
 
     /**
      * 내핸드폰에 저장된 프린터장비
@@ -41,6 +39,9 @@ public class PrintSetService extends Service {
      */
     private Callback mCallback;
     private static PrintCallback mPrintCallback;
+
+    Handler handler = new Handler(Looper.getMainLooper());
+
 
 
 
@@ -57,16 +58,12 @@ public class PrintSetService extends Service {
         mCallback = new Callback() {
             @Override
             public void onConnectSuccess(String s, int i) {
-                try{
-                    Toast.makeText(getApplicationContext(), "연결성공", Toast.LENGTH_SHORT).show();
-                }catch (Exception e){}
+                Toast.makeText(getApplicationContext(), "연결성공", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onDisConnect() {
-                try{
-                    Toast.makeText(getApplicationContext(), "연결이 종료되었습니다", Toast.LENGTH_SHORT).show();
-                }catch (Exception e){}
+                Toast.makeText(getApplicationContext(), "연결이 종료되었습니다", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -97,31 +94,48 @@ public class PrintSetService extends Service {
         mPrintCallback = new PrintCallback() {
             @Override
             public void onRibbonUsed(double v) {
-                try{
-                    Toast.makeText(getApplicationContext(), "onRibbonUsed...", Toast.LENGTH_SHORT);
-                }catch (Exception e){}
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run()
+                    {
+                        Toast.makeText(getApplicationContext(), "onRibbonUsed...", Toast.LENGTH_SHORT);
+                    }
+                }, 0);
             }
 
             @Override
             public void onPrintProgress(int i) {
-                try{
-                    Toast.makeText(getApplicationContext(), "onPrintProgress...", Toast.LENGTH_SHORT);
-                }catch (Exception e){}
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run()
+                    {
+                        Toast.makeText(getApplicationContext(), "onPrintProgress...", Toast.LENGTH_SHORT);
+                    }
+                }, 0);
             }
 
             @Override
             public void onPrintPageCompleted() {
-                try{
-                    mJCAPI.endJob();
-                    Toast.makeText(getApplicationContext(), "인쇄성공", Toast.LENGTH_SHORT).show();
-                }catch (Exception e){}
+                mJCAPI.endJob();
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run()
+                    {
+                        Toast.makeText(getApplicationContext(), "인쇄성공", Toast.LENGTH_SHORT).show();
+                    }
+                }, 0);
             }
 
             @Override
             public void onPageNumberReceivingTimeout() {
-                try{
-                    Toast.makeText(getApplicationContext(), "onPageNumberReceivingTimeout...", Toast.LENGTH_SHORT);
-                }catch (Exception e){}
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run()
+                    {
+                        Toast.makeText(getApplicationContext(), "onPageNumberReceivingTimeout...", Toast.LENGTH_SHORT);
+                    }
+                }, 0);
             }
 
             @Override
@@ -131,7 +145,14 @@ public class PrintSetService extends Service {
                     if (i < 8) {
                         mJCAPI.endJob();
                     }else {
-                        Toast.makeText(getApplicationContext(), "인쇄 실패에 대한 예외 코드:"+i, Toast.LENGTH_SHORT).show(); //인쇄 실패에 대한 예외 코드
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run()
+                            {
+                                Toast.makeText(getApplicationContext(), "인쇄 실패에 대한 예외 코드:"+i, Toast.LENGTH_SHORT).show(); //인쇄 실패에 대한 예외 코드
+                            }
+                        }, 0);
+
                     }
                 }catch (Exception e){}
 
@@ -161,16 +182,10 @@ public class PrintSetService extends Service {
          */
         mJCAPI = JCAPI.getInstance(mCallback);
 
-        //저장된 장치강 없으면 서비스중지
+        //저장된 장치가 없으면 서비스중지
         if( deviceAddress == null || deviceAddress == ""){
             return super.onStartCommand(intent, flags, startId);
         }
-
-
-        /**
-         * 핸드폰 블루투스관리어댑터 인스턴스
-         */
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
 
         // 프린터 연결
@@ -200,55 +215,23 @@ public class PrintSetService extends Service {
      */
     public void checkPrinter(){
 
-        //连接前，请终止蓝牙搜索 접속전, 블루투스검색 중지요청
-        if (mBluetoothAdapter != null && mBluetoothAdapter.isDiscovering()) {
-            mBluetoothAdapter.cancelDiscovery();
-        }
-
-
-
+        // 직전연결장비의 MAC으로 장비상태 가져오기
         BluetoothDevice bluetoothDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(deviceAddress);
         int deviceStatus = bluetoothDevice.getBondState();
         
-        
-        //未配对 进行配对 미페어링 페이링진행
-        if (deviceStatus == BOND_NONE) {
-            try {
-                // 与设备配对 기기와 페어링
-                if (ClsUtils.createBond(bluetoothDevice.getClass(), bluetoothDevice)) {
-                    Toast.makeText(getApplicationContext(), "페어링시작", Toast.LENGTH_SHORT).show();
 
-                    // 연결시작
-                    int isOpenSuccess = mJCAPI.openPrinterByAddress(getApplication(), deviceAddress, 0);
-                    if (isOpenSuccess == 0) {
-                        Toast.makeText(getApplicationContext(), "장치연결 성공", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(), "장치연결 실패", Toast.LENGTH_SHORT).show();
-                    }
-
-                } else {
-                    Toast.makeText(getApplicationContext(), "페어링실패", Toast.LENGTH_SHORT).show();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
+        // 페어링된 프린터는 바로 연결시도
         //已配对进行连接 연결하기 위해 페어링됨
-        else if (deviceStatus == BOND_BONDED) {
+        if (deviceStatus == BOND_BONDED) {
 
             int isOpenSuccess = mJCAPI.openPrinterByAddress(getApplication(), deviceAddress, 0);
 
             if (isOpenSuccess == 0) {
                 Toast.makeText(getApplicationContext(), "장치연결 성공", Toast.LENGTH_SHORT).show();
-            }
-            else{
+            } else {
                 Toast.makeText(getApplicationContext(), "장치의 전원이 켜져있는지 확인하세요", Toast.LENGTH_SHORT).show();
             }
-
         }
-
         
     }
 

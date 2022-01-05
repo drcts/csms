@@ -7,6 +7,33 @@
         <h1></h1>
     </div>
     <div role="main" class="ui-content  main_content" style="margin-top:-10px;margin-bottom:25px;">
+        <div class="search-group">
+            <table data-role="table" data-mode="columntoggle:none" class="ui-responsive" id="NotTable1">
+                <thead>
+                <tr>
+                    <th data-priority="1" style="width:20%;">기술지원</th> <!--B-->
+                    <th data-priority="1" style="width:20%;">A/S</th> <!--O-->
+                    <th data-priority="1" style="width:20%;">실사</th> <!--D-->
+                    <th data-priority="1" style="width:20%;">설치</th> <!--S-->
+                    <th data-priority="1" style="width:20%;">납품</th> <!--L-->
+                </tr>
+                </thead>
+                <tbody id="NotDoneView1">
+                </tbody>
+            </table>
+            <table data-role="table" data-mode="columntoggle:none" class="ui-responsive" id="NotTable2">
+                <thead>
+                <tr>
+                    <th data-priority="1" style="width:20%;">회수</th> <!--R-->
+                    <th data-priority="1" style="width:25%;">업그레이드</th> <!--U-->
+                    <th data-priority="1" style="width:20%;">기타</th> <!--E-->
+                    <th data-priority="1" style="width:35%;">삽캐스트</th> <!--SHAP-->
+                </tr>
+                </thead>
+                <tbody id="NotDoneView2">
+                </tbody>
+            </table>
+        </div>
         <div class="search-group"  style="margin-bottom:0px!important;">
             <input id="txtRcvNo" style="width:80%;" type="text" data-clear-btn="true" placeholder="접수번호/고객/접수내용 검색"/>
             <input id="btELSearch" type="button" value="검색" data-corners="false" />

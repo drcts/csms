@@ -190,13 +190,25 @@ function wsGijumStart(comCd, gijumCd, callback) {
 }
 
 
+
 //프린트 설정페이지
 var fn_printer = function () {
-    cordova.plugins.web_call.setMethod([''],function(ret){
-        alert('setMethod success - ' + ret);
+    //백그라운드 서비스구동체크
+    cordova.plugins.web_call.svcMethod([''],function(ret){
+        //alert('svcMethod success - ' + ret);
+
+        cordova.plugins.web_call.setMethod([''],function(ret){
+            alert('setMethod success - ' + ret);
+        },function(err){
+            alert('setMethod error - ' + err);
+        });
+
     },function(err){
-        alert('setMethod error - ' + err);
+        alert('svcMethod error 프린터장비 연결 백그라운드 서비스 실패...');
     });
+
+
+
 }
 
 

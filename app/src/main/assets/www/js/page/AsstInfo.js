@@ -378,15 +378,42 @@ var fn_pcnum_scan = function(){
 
 
 
+
+
+var startPrinterService = function(){
+    /**
+    프린터장비 연결 백그라운드 서비스
+    */
+    cordova.plugins.web_call.svcMethod([''],function(ret){
+        //alert('svcMethod success - ' + ret);
+        //백그라운드 서비스가 있을때 프린터출력
+        if(ret == 'Y'){
+            fn_qr_print_callback();
+        }
+        else if(ret == 'N'){
+            alert('연결설비스가 시작되었습니다. [라벨출력]버튼을 한번더 클릭해주세요');
+        }
+        else{
+            alert('프린터장비 연결 백그라운드 서비스 실패...');
+        }
+    },function(err){
+        alert('svcMethod error - ' + err);
+    });
+}
+
 //qr프린트
 var fn_qr_print = function () {
+    startPrinterService();//프린터장비 연결 백그라운드 서비스
+}
+
+//qr프린트
+var fn_qr_print_callback = function () {
     var pcNum = $('#txtPcNum').val();
     var comNm = GetComNm()+" - "+GetGijumNm();
-    //    alert('comNm - ' + comNm)
-    cordova.plugins.web_call.coolMethod([pcNum, comNm],function(ret){
-        alert('coolMethod success - ' + ret);
+
+    cordova.plugins.web_call.printMethod([pcNum, comNm],function(ret){
+        //alert('printMethod success - ' + ret);
     },function(err){
-        //alert('coolMethod error - ' + err);
         alert('프린터 설정화면에서 프린터를 연결하세요.');
     });
 }

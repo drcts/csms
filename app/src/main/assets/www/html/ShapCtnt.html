@@ -1,0 +1,138 @@
+<div id="ShapCtnt" data-role="page">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <!--<a href="#" data-rel="back" data-direction="reverse" data-icon="arrow-l" data-iconpos="left"></a>-->
+        <a href="#" id="btnShapCtnt" data-icon="arrow-l" data-iconpos="left"></a>
+        <h1></h1>
+    </div>
+
+   <div id="ShapCtntContent"  data-role="main" class="ui-content">
+       <div data-role="collapsible" data-inset="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-collapsed="false">
+           <h4>장애접수정보</h4>
+           <ul  data-role="listview" data-icon="false" >
+               <li >
+                   <div class="ui-label">
+                       <div class="ui-label-title">지점명</div>
+                       <input id='gijumNm' type="text" readonly="readonly" data-corners="false"/>
+                   </div>
+               </li>
+               <li >
+                   <div class="ui-label">
+                       <div class="ui-label-title">담당자</div>
+                       <input id='mngrNm' type="text" readonly="readonly" data-corners="false"/>
+                   </div>
+               </li>
+               <li >
+                   <div class="ui-label">
+                       <div class="ui-label-title">연락처</div>
+                       <input id='phoneNo' type="text" readonly="readonly" data-corners="false"/>
+                       <img src="../img/call-24px.svg" id="btnShapCall" style="float:right;margin-bottom:-7px;" data-role="none"></img>
+                   </div>
+               </li>
+               <li >
+                   <div class="ui-label">
+                       <div class="ui-label-title">접수일시</div>
+                       <input id='reqDt' type="text" readonly="readonly" data-corners="false"/>
+                   </div>
+               </li>
+               <li >
+                   <div class="ui-label">
+                       <div class="ui-label-title">제품종류</div>
+                       <input id='prodNm' type="text" readonly="readonly" data-corners="false"/>
+                   </div>
+               </li>
+               <li >
+                   <div class="ui-label">
+                       <div class="ui-label-title">구분</div>
+                       <input id='rcvTypNm' type="text" readonly="readonly" data-corners="false"/>
+                   </div>
+               </li>
+               <li >
+                   <div class="ui-label">
+                       <div class="ui-label-title">모델명</div>
+                       <input id='modelNm' type="text" readonly="readonly" data-corners="false"/>
+                   </div>
+               </li>
+               <li >
+                   <div class="ui-label">
+                       <div class="ui-label-title">장애내용</div>
+                       <textarea id='reqCmnt' placeholder='장애내용' style='width:99%;' readonly="readonly" data-corners="false"></textarea>
+                   </div>
+               </li>
+           </ul>
+       </div>
+
+       <div data-role="collapsible" data-inset="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-collapsed="false">
+               <h4>서비스 처리등록</h4>
+               <ul  data-role="listview" data-icon="false" >
+                   <li >
+                       <div class="ui-label">
+                           <div class="ui-label-title">처리상태</div>
+
+                           <fieldset data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-mini">
+                               <label for="RSLTSTAT_CD_01">수리완료</label>
+                               <input type="radio" name="RSLTSTAT_CD" id="RSLTSTAT_CD_01" value="01" checked>
+                               <label for="RSLTSTAT_CD_02">자재미결</label>
+                               <input type="radio" name="RSLTSTAT_CD" id="RSLTSTAT_CD_02" value="02">
+                               <label for="RSLTSTAT_CD_03">결재대기</label>
+                               <input type="radio" name="RSLTSTAT_CD" id="RSLTSTAT_CD_03" value="03">
+                               <label for="RSLTSTAT_CD_04">업체입고</label>
+                               <input type="radio" name="RSLTSTAT_CD" id="RSLTSTAT_CD_04" value="04">
+                               <label for="RSLTSTAT_CD_05">수리취소</label>
+                               <input type="radio" name="RSLTSTAT_CD" id="RSLTSTAT_CD_05" value="05">
+                               <label for="RSLTSTAT_CD_06">수리불가</label>
+                               <input type="radio" name="RSLTSTAT_CD" id="RSLTSTAT_CD_06" value="06">
+                               <label for="RSLTSTAT_CD_07">대체장비제공</label>
+                               <input type="radio" name="RSLTSTAT_CD" id="RSLTSTAT_CD_07" value="07">
+                               <label for="RSLTSTAT_CD_08">방문재약속</label>
+                               <input type="radio" name="RSLTSTAT_CD" id="RSLTSTAT_CD_08" value="08">
+                           </fieldset>
+                       </div>
+                   </li>
+                   <li>
+                       <div class="ui-label">
+                           <div class="ui-label-title">처리일시</div>
+                           <input id="RSLT_DD1" value="" type="text" data-corners="false" class="ui-mini"/>
+                           <input type="time" data-clear-btn="true" id="RSLT_DD2" value="" class="ui-mini">
+                       </div>
+                   </li>
+                   <li >
+                       <div class="ui-label">
+                           <div class="ui-label-title">처리내역</div>
+                           <textarea id='rsltCmnt' placeholder='처리내역' style='width:99%;' data-corners="false"></textarea>
+                       </div>
+                   </li>
+               </ul>
+
+           </div>
+
+       <div class="ui-label" style="padding-bottom:25px">
+            <button id="btnSaveShap" class='ui-btn ui-btn-b ui-corner-all ui-icon-arrow-r ui-btn-icon-right' data-corners="true">장애처리저장</button>
+        </div>
+
+       <a href="#" id="btnShapCtntTakePic" class="ui-btn ui-icon-camera ui-btn-icon-bottom" onclick="ShapCtntTakePicture();">사진찍기</a>
+
+       <div class="thumbnail thumbnail-fix ui-icon-thumbnail" id="divImg" ><img id="imgPhoto" src="" alt=""/></div>
+
+       <div data-role="collapsible" data-inset="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-collapsed="false" data-theme="b">
+           <h4>사진파일명</h4>
+
+           <ul data-role="listview" data-inset="true" id="list_photo" data-theme="e">
+               <li data-icon='delete' abbr='51871'><a href='#'  onclick='delFile(51871);'>also.jpg </a></li>
+               <li data-icon='delete' abbr='51865'><a href='#'  onclick='delFile(51865);'>xu.jpg </a></li>
+           </ul>
+       </div>
+
+   </div>
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li><a   href="#Main" data-icon="home">Home</a></li>
+                <li><a     href="#" onclick="goNotDone();"  data-icon="employee" class="ui-btn-active ui-state-persist">미처리현황</a></li>
+                <li><a     href="#" onclick="goDone();"   data-icon="attendance">처리완료현황</a></li>
+                <li><a     href="#" onclick="goAsst();"   data-icon="photo">자산실사</a></li>
+                <li><a   href="#Login" data-icon="setting">로그아웃</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -81,8 +81,42 @@ public class web_call extends CordovaPlugin {
         }
 
 
+
+
+        // 프린터장비 백그라운드 서비스실행
+        else if (action.equals("svcMethod")) {
+            //서비스실행중이면 아무것도하지않음
+            if(PrintSetService.mJCAPI != null){
+                callbackContext.success("Y");
+                return true;
+            }
+
+
+            Intent it = new Intent(cordova.getContext(), PrintSetService.class);
+
+            try{
+                cordova.getContext().stopService(it);
+            }catch(Exception e){
+                Log.d("CSMS","서비스 중지실패...");
+            }
+            //            try {
+            //                Thread.sleep(3000);
+            //            } catch (InterruptedException e) {
+            //                e.printStackTrace();
+            //            }
+            try{
+                cordova.getContext().startService(it);
+            }catch(Exception e){
+                Log.d("CSMS","서비스 중지실패...");
+            }
+            // 서비스를 시작했기때문에 프린터를 바로 날리지않도록 N리턴 - 출력버튼은 한번더 누르도록 유도함
+            callbackContext.success("N");
+            return true;
+        }
+
+
         // 바코드출력
-        else if (action.equals("coolMethod")) {
+        else if (action.equals("printMethod")) {
             String barcode = "";
             String comNm = "";
             try{
@@ -117,30 +151,6 @@ public class web_call extends CordovaPlugin {
             return true;
         }
 
-
-        // 프린터장비 백그라운드 서비스
-        else if (action.equals("svcMethod")) {
-
-            Intent it = new Intent(cordova.getContext(), PrintSetService.class);
-
-            try{
-                cordova.getContext().stopService(it);
-            }catch(Exception e){
-                Log.d("CSMS","서비스 중지실패...");
-            }
-            //            try {
-            //                Thread.sleep(3000);
-            //            } catch (InterruptedException e) {
-            //                e.printStackTrace();
-            //            }
-            try{
-                cordova.getContext().startService(it);
-            }catch(Exception e){
-                Log.d("CSMS","서비스 중지실패...");
-            }
-
-
-        }
 
         // 앱종료
         else if (action.equals("exitMethod")) {

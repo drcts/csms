@@ -23,7 +23,7 @@ $(document).on('pageinit', "#Login", function (e) {
     //프린터출력
     $( "#divTitle" ).on("click", function() {
         //        e.preventDefault();
-        //        cordova.plugins.web_call.coolMethod('Alsokyun',function(ret){
+        //        cordova.plugins.web_call.printMethod('Alsokyun',function(ret){
         //            alert('success - ' + ret);
         //        },function(err){
         //            alert('error - ' + err);
@@ -65,6 +65,7 @@ $(document).on('pageshow', "#Login",function () {
     //navigator.splashscreen.hide();
     //log("pageshow login");
 
+
     /*
     0.업데이트여부처리
     */
@@ -92,6 +93,7 @@ $(document).on('pageshow', "#Login",function () {
             alert('checkMethod error - ' + err);
         });
     });
+
 
 });
 
@@ -166,7 +168,6 @@ function onLogIn() {
               //PageNonChange("#Main");
               $.mobile.changePage("#Main");
 
-
           }
           else {
               showErrorMessage(RtnCode);
@@ -205,5 +206,3 @@ function pageRefrash() {
     $('#txUserId').val("");
     $('#txUserPW').val("");
 }
-
-

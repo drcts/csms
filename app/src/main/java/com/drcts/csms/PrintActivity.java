@@ -18,7 +18,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.drcts.csms.adapter.DeviceAdapter;
@@ -26,7 +25,6 @@ import com.drcts.csms.bean.Device;
 import com.drcts.csms.utils.ClsUtils;
 import com.drcts.csms.utils.Preference;
 import com.gengcon.www.jcprintersdk.JCAPI;
-import com.gengcon.www.jcprintersdk.callback.Callback;
 import com.gengcon.www.jcprintersdk.callback.PrintCallback;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
@@ -146,7 +144,6 @@ public class PrintActivity extends Activity {
 
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,6 +157,8 @@ public class PrintActivity extends Activity {
         initPrint();
         initEvent();
 
+        //초기검색
+        searchBluetoothDevice();        
     }
 
 
@@ -178,12 +177,22 @@ public class PrintActivity extends Activity {
         mPrintCallback = new PrintCallback() {
             @Override
             public void onRibbonUsed(double v) {
-                Toast.makeText(getApplicationContext(), "onRibbonUsed...", Toast.LENGTH_SHORT);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "onRibbonUsed...", Toast.LENGTH_SHORT);
+                    }
+                });
             }
 
             @Override
             public void onPrintProgress(int i) {
-                Toast.makeText(getApplicationContext(), "onPrintProgress...", Toast.LENGTH_SHORT);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "onPrintProgress...", Toast.LENGTH_SHORT);
+                    }
+                });
             }
 
             @Override
@@ -199,7 +208,12 @@ public class PrintActivity extends Activity {
 
             @Override
             public void onPageNumberReceivingTimeout() {
-                Toast.makeText(getApplicationContext(), "onPageNumberReceivingTimeout...", Toast.LENGTH_SHORT);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "onPageNumberReceivingTimeout...", Toast.LENGTH_SHORT);
+                    }
+                });
             }
 
             @Override
@@ -251,6 +265,9 @@ public class PrintActivity extends Activity {
                 //获取意图 인텐트 획득
                 String action = intent.getAction();
                 BluetoothDevice bluetoothDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+
+
+                // 1.블루투스장치 발견 신호
                 if (BluetoothDevice.ACTION_FOUND.equals(action)) {
 
                     String deviceAddress = bluetoothDevice.getAddress();
@@ -262,7 +279,7 @@ public class PrintActivity extends Activity {
                         mDeviceAddressList.add(deviceAddress);
                         Device device = null;
                         //显示已配对设备 기 페이링장비 표시
-                        if (bluetoothDevice.getBondState() == BOND_NONE) {
+                        if (bluetoothDevice.getBondState() == BOND_BONDED) {
                             device = new Device(bluetoothDevice.getName(), deviceAddress, BOND_BONDED);
                         } else if (bluetoothDevice.getBondState() != BOND_BONDED) {
                             device = new Device(bluetoothDevice.getName(), deviceAddress, BOND_NONE);
@@ -278,12 +295,14 @@ public class PrintActivity extends Activity {
                         });
                     }
 
-
-                } else if (BluetoothDevice.ACTION_PAIRING_REQUEST.equals(action)) {
+                }
+                // 2.블루투스장치의 페어링요청 신호
+                else if (BluetoothDevice.ACTION_PAIRING_REQUEST.equals(action)) {
                     String deviceAddress = bluetoothDevice.getAddress();
                     try {
                         //3.调用setPin方法进行配对... 변경 setPin방식 페이링진행
                         ClsUtils.setPin(bluetoothDevice.getClass(), bluetoothDevice, "0000");
+
 
                         //1.确认配对 페어링확인
                         ClsUtils.setPairingConfirmation(bluetoothDevice.getClass(), bluetoothDevice, true);
@@ -314,49 +333,20 @@ public class PrintActivity extends Activity {
 
 
                 }
-                // row level connected ACL - 블루스트등록되었지만 활성화되지않은상태
+
+                // 3.row level connected ACL - 블루스트등록되었지만 활성화되지않은상태
                 else if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)) {
 
                     String deviceAddress = bluetoothDevice.getAddress();
-                    //上一次连接状态未已配对; 최근 페어링되지않은 접속상태
-                    if (mLastState == BOND_BONDED) {
-                        if (mDeviceAddressList.contains(deviceAddress)) {
-                            for (Device device : mDeviceList) {
-                                if (device.getDeviceAddress().equals(deviceAddress)) {
-                                    if (device.getDeviceStatus() == 14) { //ACL상태
-                                        return;
-                                    } else {
-                                        device.setDeviceConnectStatus(14);
-                                        runOnUiThread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                mDeviceAdapter.notifyDataSetChanged();
-                                            }
-                                        });
 
-                                        return;
-
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                } 
-                // ACL 상태에서 해제된 상태
-                else if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action)) {
-                    String deviceAddress = bluetoothDevice.getAddress();
+                    // 조회된리스트 상태 업데이트
                     if (mDeviceAddressList.contains(deviceAddress)) {
                         for (Device device : mDeviceList) {
                             if (device.getDeviceAddress().equals(deviceAddress)) {
-                                if (device.getDeviceStatus() == BOND_BONDED) {
+                                if (device.getDeviceStatus() == 14) { //ACL상태
                                     return;
                                 } else {
-                                    if (bluetoothDevice.getBondState() == BOND_BONDED) {
-                                        device.setDeviceConnectStatus(BOND_BONDED);
-                                    } else if (bluetoothDevice.getBondState() != BOND_BONDED) {
-                                        device.setDeviceConnectStatus(BOND_NONE);
-                                    }
+                                    device.setDeviceConnectStatus(14);
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -370,6 +360,35 @@ public class PrintActivity extends Activity {
                             }
                         }
                     }
+
+                } 
+                // 4.ACL 상태에서 해제된 상태
+                else if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action)) {
+                    String deviceAddress = bluetoothDevice.getAddress();
+                    if (mDeviceAddressList.contains(deviceAddress)) {
+                        for (Device device : mDeviceList) {
+                            if (device.getDeviceAddress().equals(deviceAddress)) {
+                                if (device.getDeviceStatus() == BOND_BONDED) {
+                                    return;
+                                } else {
+                                    if (bluetoothDevice.getBondState() == BOND_BONDED) {
+                                        device.setDeviceConnectStatus(BOND_BONDED);
+                                    } else if (bluetoothDevice.getBondState() != BOND_BONDED) {
+                                        device.setDeviceConnectStatus(BOND_NONE);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    //목록업데이트
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mDeviceAdapter.notifyDataSetChanged();
+                        }
+                    });
+                    return;
                 }
             }
         };
@@ -499,7 +518,9 @@ public class PrintActivity extends Activity {
                             mBluetoothAdapter.cancelDiscovery();
                         }
 
-                        final Device device = mDeviceList.get(position);
+
+
+                        final Device device =mDeviceList.get(position);
                         String deviceAddress = device.getDeviceAddress();
 
                         BluetoothDevice bluetoothDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(deviceAddress);
@@ -509,7 +530,6 @@ public class PrintActivity extends Activity {
                         //未配对 进行配对 미페어링 페이링진행
                         if (deviceStatus == BOND_NONE) {
                             try {
-
 
                                 // 与设备配对 기기와 페어링
                                 if (ClsUtils.createBond(bluetoothDevice.getClass(), bluetoothDevice)) {
@@ -535,6 +555,7 @@ public class PrintActivity extends Activity {
 
                         //已配对进行连接 연결하기 위해 페어링됨
                         if (deviceStatus == BOND_BONDED) {
+
 
                             int isOpenSuccess = mJCAPI.openPrinterByAddress(getApplication(), deviceAddress, 0);
 
@@ -610,6 +631,10 @@ public class PrintActivity extends Activity {
                                     if (pairedDevices.size() > 0) {
                                         for (BluetoothDevice device : pairedDevices) {
                                             String deviceAddress = device.getAddress();
+//                                            if("B21-C2BDB09050671".equals(device.getName()) ) {
+//                                                continue;
+//                                            }
+
                                             String deviceName = device.getName();
                                             boolean isPrinterType = device.getBluetoothClass().getDeviceClass() == 1664; // JC bs3 블루투스프린터
                                             if (!mDeviceAddressList.contains(deviceAddress) && deviceName != null && isPrinterType) {
@@ -652,7 +677,6 @@ public class PrintActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        searchBluetoothDevice();
 
 //        etPrintText.setText(mPrintText);
 //        etSetWidth.setText(mLabelWidth);
@@ -707,26 +731,58 @@ public class PrintActivity extends Activity {
             return;
         }
 
-        int itype=mJCAPI.getLabelType();
-        Log.d(TAG, "打印测试-取消打印-异常回调: itype - " + itype); //인쇄 테스트 취소 인쇄 비정상 콜백
-        //mJCAPI.startJob(60, 40, 0);
-        mJCAPI.startJob(40, 12, 90);//yskim
+        //프린터타입
+        int ptype = mJCAPI.getPrinterType();
+        //D11
+        if(ptype == 512){
+            mJCAPI.startJob(40, 12, 90);//B21
+            mJCAPI.startPage();
 
-        mJCAPI.startPage();
+            mJCAPI.drawQrCode(barcode,3,2,8,0);
 
-        mJCAPI.drawQrCode(barcode,2,2,8,0);
+            mJCAPI.drawText(barcode, 13, -6, 130, 20
+                    , 3, 0.0, 1.0F, (byte) 0x01
+                    , 0, 0, false, "");
+            mJCAPI.drawText(comNm, 13, 0, 130, 17
+                    , 2.5, 0.0, 1.0F, (byte) 0x01
+                    , 0, 0, false, "");
 
-        mJCAPI.drawText(barcode, 12, -6, 130, 20
-                , 3, 0.0, 1.0F, (byte) 0x01
-                , 0, 0, false, "");
-        mJCAPI.drawText(comNm, 12, 0, 130, 17
-                , 2, 0.0, 1.0F, (byte) 0x01
-                , 0, 0, false, "");
+            mJCAPI.endPage();
+            mJCAPI.commitJob(1, 1, 3,  mPrintCallback);
+        }
+        //B21
+        else if(ptype == 771){
+            mJCAPI.startJob(50, 30, 0);//B21
+            mJCAPI.startPage();
 
+            mJCAPI.drawQrCode(barcode,2,7,14,0);
 
-        mJCAPI.endPage();
-        //mJCAPI.commitJob(1, 1, 3,  mPrintCallback);
-        mJCAPI.commitJob(1, 1, 3,  mPrintCallback);
+            mJCAPI.drawText(barcode, 17, 2, 35, 18
+                    , 4, 0.0, 1.0F, (byte) 0x01
+                    , 0, 0, false, "");
+            mJCAPI.drawText(comNm, 17, 10, 35, 10
+                    , 3, 0.0, 1.0F, (byte) 0x01
+                    , 0, 0, false, "");
+
+            mJCAPI.endPage();
+            mJCAPI.commitJob(1, 1, 3,  mPrintCallback);
+        }
+        else{
+            mJCAPI.startJob(40, 12, 90);//B21
+            mJCAPI.startPage();
+
+            mJCAPI.drawQrCode(barcode,3,2,8,0);
+
+            mJCAPI.drawText(barcode, 13, -6, 130, 20
+                    , 3, 0.0, 1.0F, (byte) 0x01
+                    , 0, 0, false, "");
+            mJCAPI.drawText(comNm, 13, 0, 130, 17
+                    , 2.5, 0.0, 1.0F, (byte) 0x01
+                    , 0, 0, false, "");
+
+            mJCAPI.endPage();
+            mJCAPI.commitJob(1, 1, 3,  mPrintCallback);
+        }
 
 
 

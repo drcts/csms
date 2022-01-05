@@ -73,6 +73,7 @@ var initNotDoneList = function(){
         $("#btnTakePic").prop("disabled", false).removeClass("ui-state-disabled");
     }
 
+    wsNotDoneList_Count();
 
     //조회
     $("#btELSearch").on("click", function(e) {
@@ -115,6 +116,65 @@ var goWelsCtntA = function(rcvIdx){
   ParamPageChange("WSInstCtnt.html",$('#txtRcvNo').val());
 }
 
+var goShapCtntA = function(rcvIdx){
+ SetRcvIdx(rcvIdx);
+ isDone = "A"; //미처리현황 메뉴
+ //PageNonChange("WSInstCtnt.html");
+ ParamPageChange("ShapCtnt.html",$('#txtRcvNo').val());
+}
+
+function wsNotDoneList_Count(){
+ var url = ws_url + 'GetNotDoneList_Count';
+
+    var srcTxt = $('#txtRcvNo').val();
+
+    var data = "{userId:'" + GetUserId() + "', rcvStatYn:'N', srcTxt:'" + srcTxt + "', resentYn:'', userAuth:'"+GetUserAuth()+"', userGbn:'"+GetUserGbn()+"'}";
+
+    var sucess = function(json){
+
+        var list1 = $("#NotDoneView1");
+        list1.children().remove();
+        var list2 = $("#NotDoneView2");
+        list2.children().remove();
+
+        var Table = [];
+        try{
+            Table = JSON.parse(json.d).Table;
+        }catch(e){
+            return;
+        }
+
+
+        var cnt = 0; //for문 카운터
+        $.each(Table, function(key, val){
+
+            var bCnt = val.B_CNT; //기술지원
+            var dCnt = val.D_CNT; //실사
+            var eCnt = val.E_CNT; //기타
+            var lCnt = val.L_CNT; //납품
+            var oCnt = val.O_CNT; //A/S
+            var rCnt = val.R_CNT; //회수
+            var sCnt = val.S_CNT; //설치
+            var uCnt = val.U_CNT; //업그레이드
+            var shapCnt = val.SHAPCNT; //샵캐스트
+
+            var button1;
+            var button2;
+
+            button1 = $("<tr class='trow'><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td></tr>".format(bCnt, oCnt, dCnt, sCnt, lCnt));
+            button2 = $("<tr class='trow'><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></tr>".format(rCnt, uCnt, eCnt, shapCnt));
+
+            list1.append(button1);
+            list2.append(button2);
+
+        });
+        $("#NotTable1").table("refresh");
+        $("#NotTable2").table("refresh");
+
+    };
+
+    getAJAX(url, data, sucess);
+}
 /// 미처리현황조회 웹서비스 ///////////////////////////////////////////
 function wsNotDoneList(page) {
     gfn_startLoading();
@@ -174,6 +234,10 @@ function wsNotDoneList(page) {
                 {
                      button = $("<tr class='trow'><td onclick='goReqCtntA({4});' style='color:red' >{0}</td><td onclick='goReqCtntA({4});' style='color:red'>{1}</td></tr><tr><td onclick='goReqCtntA({4});' style='color:red'>{5}</td><td onclick='goReqCtntA({4});' style='color:red'>{6}</td></tr><tr><td colspan='2' onclick='goReqCtntA({4});' style='color:red'>{2}</td></tr>".format(rcvDd, fn_nvl(custNm,"&nbsp;" ), fn_nvl(rcvCnts,"&nbsp;" ), visitNo, rcvIdx, fn_nvl(cletNm,"&nbsp;" ), fn_nvl(areaNm,"&nbsp;" )));
                 }
+                else if(viewType == "SHAP")
+                {
+                     button = $("<tr class='trow'><td onclick='goShapCtntA({4});' style='color:red' >{0}</td><td onclick='goShapCtntA({4});' style='color:red'>{1}</td></tr><tr><td onclick='goShapCtntA({4});' style='color:red'>{5}</td><td onclick='goShapCtntA({4});' style='color:red'>{6}</td></tr><tr><td colspan='2' onclick='goShapCtntA({4});' style='color:red'>{2}</td></tr>".format(rcvDd, fn_nvl(custNm,"&nbsp;" ), fn_nvl(rcvCnts,"&nbsp;" ), visitNo, rcvIdx, fn_nvl(cletNm,"&nbsp;" ), fn_nvl(areaNm,"&nbsp;" )));
+                }
                 else{
                     button = $("<tr class='trow'><td onclick='goWelsCtntA({4});' style='color:red' >{0}</td><td onclick='goWelsCtntA({4});' style='color:red'>{1}</td></tr> <tr><td onclick='goWelsCtntA({4});' style='color:red'>{5}</td><td onclick='goWelsCtntA({4});' style='color:red'>{6}</td></tr><tr><td colspan='2' onclick='goWelsCtntA({4});' style='color:red'>{2}</td></tr>".format(rcvDd, fn_nvl(custNm,"&nbsp;" ), fn_nvl(rcvCnts,"&nbsp;" ), visitNo, rcvIdx, fn_nvl(cletNm,"&nbsp;" ), fn_nvl(areaNm,"&nbsp;" )));
                 }
@@ -182,6 +246,10 @@ function wsNotDoneList(page) {
                 if(viewType == "CSMS")
                 {
                      button = $("<tr class='trow'><td onclick='goReqCtntA({4});' >{0}</td><td onclick='goReqCtntA({4});'>{1}</td></tr> <tr><td onclick='goReqCtntA({4});' >{5}</td><td onclick='goReqCtntA({4});'>{6}</td></tr> <tr><td colspan='2' onclick='goReqCtntA({4});'>{2}</td></tr>".format(rcvDd, fn_nvl(custNm,"&nbsp;" ), fn_nvl(rcvCnts,"&nbsp;" ), visitNo, rcvIdx, fn_nvl(cletNm,"&nbsp;" ), fn_nvl(areaNm,"&nbsp;" )));
+                }
+                else if(viewType == "SHAP")
+                {
+                     button = $("<tr class='trow'><td onclick='goShapCtntA({4});' >{0}</td><td onclick='goShapCtntA({4});'>{1}</td></tr> <tr><td onclick='goShapCtntA({4});' >{5}</td><td onclick='goShapCtntA({4});'>{6}</td></tr> <tr><td colspan='2' onclick='goShapCtntA({4});'>{2}</td></tr>".format(rcvDd, fn_nvl(custNm,"&nbsp;" ), fn_nvl(rcvCnts,"&nbsp;" ), visitNo, rcvIdx, fn_nvl(cletNm,"&nbsp;" ), fn_nvl(areaNm,"&nbsp;" )));
                 }
                 else{
                     button = $("<tr class='trow'><td onclick='goWelsCtntA({4});' >{0}</td><td onclick='goWelsCtntA({4});'>{1}</td></tr><tr><td onclick='goWelsCtntA({4});' >{5}</td><td onclick='goWelsCtntA({4});'>{6}</td></tr><tr><td colspan='2' onclick='goWelsCtntA({4});'>{2}</td></tr>".format(rcvDd, fn_nvl(custNm,"&nbsp;" ), fn_nvl(rcvCnts,"&nbsp;" ), visitNo, rcvIdx, fn_nvl(cletNm,"&nbsp;" ), fn_nvl(areaNm,"&nbsp;" )));

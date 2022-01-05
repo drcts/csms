@@ -9,6 +9,7 @@ cordova.define("com.drcts.csms.webcall.web_call", function(require, exports, mod
     };
 
 
+
     /**
     프린터설정
     */
@@ -18,8 +19,8 @@ cordova.define("com.drcts.csms.webcall.web_call", function(require, exports, mod
     /**
     라벨인쇄
     */
-    exports.coolMethod = function (arg0, success, error) {
-        exec(success, error, 'web_call', 'coolMethod', [arg0]);
+    exports.printMethod = function (arg0, success, error) {
+        exec(success, error, 'web_call', 'printMethod', [arg0]);
     };
 
     /**

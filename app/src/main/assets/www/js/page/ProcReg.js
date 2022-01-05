@@ -313,24 +313,31 @@ function wsSetProcInfo(rcvIdx, callback) {
     if(getRadioValue("DISPSTAT_CD") == "C" ){
         if(fn_isNull($("#PROD_NO").val())){
             alert("제조번호를 입력해주세요");
-            $("#PROD_NO").focus();
+            gfn_endLoading();
             return;
         }
         if(fn_isNull(getRadioValue("RDO_DISPTYP_CD"))){
             alert("처리형태를 선택해주세요");
+            gfn_endLoading();
             return;
         }
         if(fn_isNull(getRadioValue("RDO_DISP_CD2"))){
             alert("증상코드를 선택해주세요");
+            gfn_endLoading();
             return;
         }
         if(fn_isNull(getRadioValue("RDO_DISP_CD"))){
             alert("처리코드를 선택해주세요");
+            gfn_endLoading();
             return;
         }
     }
 
-    if(!confirm("저장하시겠습니까?"))    return;
+    if(!confirm("저장하시겠습니까?"))
+        {
+            gfn_endLoading();
+            return;
+        }
 
     var sucess = function(json) {
 
