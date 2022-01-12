@@ -1,0 +1,38 @@
+
+<!--관련사진-->
+<div id="RefPhoto" data-role="page">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <!--<a href="#" data-rel="back" data-direction="reverse" data-icon="arrow-l" data-iconpos="left"></a>-->
+        <a href="#" id="btnRefPhoto" data-icon="arrow-l" data-iconpos="left"></a>
+        <h1></h1>
+    </div>
+
+    <div data-role="main" class="ui-content">
+        <a href="#" id="btnTakePic" class="ui-btn ui-icon-camera ui-btn-icon-bottom" onclick="takePicture();">사진찍기</a>
+
+        <div class="thumbnail thumbnail-fix ui-icon-thumbnail" id="divImg" ><img id="imgPhoto" src="" alt=""/></div>
+
+        <div data-role="collapsible" data-inset="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-collapsed="false" data-theme="b">
+            <h4>사진파일명</h4>
+
+            <ul data-role="listview" data-inset="true" id="list_photo" data-theme="e">
+                <li data-icon='delete' abbr='51871'><a href='#'  onclick='delFile(51871);'>also.jpg </a></li>
+                <li data-icon='delete' abbr='51865'><a href='#'  onclick='delFile(51865);'>xu.jpg </a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li><a   href="#Main" data-icon="home">Home</a></li>
+                <li><a     href="#" onclick="goNotDone();"  data-icon="employee" class="ui-btn-active ui-state-persist">미처리현황</a></li>
+                <li><a     href="#" onclick="goDone();"   data-icon="attendance">처리완료현황</a></li>
+                <li><a     href="#" onclick="goAsst();"   data-icon="photo">자산실사</a></li>
+                <li><a   href="#Login" data-icon="setting">로그아웃</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+

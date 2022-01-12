@@ -1,0 +1,64 @@
+
+
+<!--자재요청-->
+<div id="ReqMat" data-role="page">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <!--<a href="#" data-rel="back" data-direction="reverse" data-icon="arrow-l" data-iconpos="left"></a>-->
+        <a href="#" id="btnReqMat" data-icon="arrow-l" data-iconpos="left"></a>
+        <h1></h1>
+    </div>
+
+    <div data-role="main" class="ui-content">
+
+        <div id="ReqMatCol" data-role="collapsible" data-inset="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-collapsed="false" data-theme="b">
+            <h4>
+                <span data-inline="true">자재요청</span>
+            </h4>
+            <ul data-role="listview" data-icon="false" >
+                <li>
+                    <div class='ui-grid-a'>
+                        <div class='ui-block-a'>
+                            <input id='EQP_ID' value=''  type='text' data-corners='false' placeholder='실사용자' class='ui-mini'/>
+                        </div>
+                        <div class='ui-block-b'>
+                            <input id='EQP_HP' value=''  type='text' data-corners='false' placeholder='전화번호' class='ui-mini'/>
+                        </div>
+                    </div>
+                    <div class='ui-grid-solo'>
+                        <div class='ui-block-a'><textarea id='EQP_NM' placeholder='부품명/규격' style='width:98%;' class='ui-mini' ></textarea></div>
+                    </div>
+                    <div class='ui-grid-a'>
+                        <div class='ui-block-a'>
+                            <a id='EQP_STAT' class='ui-btn ui-body-inherit ' data-corners='false' href='#EQP_STAT_Popup' data-rel='popup' data-position-to='window' data-transition='pop' ></a>
+                            <div data-role='popup' id='EQP_STAT_Popup' data-overlay-theme='c'></div>
+                        </div>
+                        <div class='ui-block-b'>
+                            <a href='#' id='btnReqMatSave' onclick='saveReqMat();' class='ui-btn ui-icon-plus ui-btn-icon-right ui-mini' >저장</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <!--기존자재요청 추가부분-->
+            <ul  id="ReqMatList" data-role="listview" data-icon="false" >
+
+           </ul>
+
+        </div>
+
+
+    </div>
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li><a   href="#Main" data-icon="home">Home</a></li>
+                <li><a     href="#" onclick="goNotDone();"  data-icon="employee" class="ui-btn-active ui-state-persist">미처리현황</a></li>
+                <li><a     href="#" onclick="goDone();"   data-icon="attendance">처리완료현황</a></li>
+                <li><a     href="#" onclick="goAsst();"   data-icon="photo">자산실사</a></li>
+                <li><a   href="#Login" data-icon="setting">로그아웃</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,42 @@
+<!--확인서명-->
+<div id="WSInstSign" data-role="page">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <!--<a href="#" data-rel="back" data-direction="reverse" data-icon="arrow-l" data-iconpos="left"></a>-->
+        <a href="#" id="btnWSInstSign" data-icon="arrow-l" data-iconpos="left"></a>
+        <h1></h1>
+    </div>
+
+    <div data-role="main" class="ui-content " style="text-align: center;" >
+        <div class="search-group">
+            <input id="txInstOldAsstNo" style="width:80%;"  type="text" data-clear-btn="true" placeholder="회수장비 자산번호"/>
+        </div>
+        <div class="search-group">
+            <input id="txInstCfmNm" style="width:80%;"  type="text" data-clear-btn="true" placeholder="확인자"/>
+        </div>
+        <div id="cvs">
+            <canvas id="inst_sig-canvas" width="-webkit-fill-available" height="200">
+                Canvas element not supported.
+            </canvas>
+        </div>
+
+        <a href="#" id="btnWSInstDelSign" class="ui-btn ui-icon-delete ui-btn-icon-right" onclick="canvas_reset3();" data-theme="b">지우기</a>
+
+        <img id="insthidImg" src="" alt="" style="display:none;"/>
+
+        <div class="ui-label">
+            <button id="btInstCfmSave" class="ui-btn ui-btn-b ui-corner-all ui-icon-arrow-r ui-btn-icon-right" onclick="InstSignCfm();">설치확인서명저장</button>
+        </div>
+    </div>
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li><a   href="#Main" data-icon="home">Home</a></li>
+                <li><a   href="#" onclick="goNotDone();"  data-icon="employee" class="ui-btn-active ui-state-persist">미처리현황</a></li>
+                <li><a   href="#" onclick="goDone();"   data-icon="attendance">처리완료현황</a></li>
+                <li><a     href="#" onclick="goAsst();"   data-icon="photo">자산실사</a></li>
+                <li><a   href="#Login" data-icon="setting">로그아웃</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

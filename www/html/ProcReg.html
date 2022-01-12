@@ -1,0 +1,120 @@
+
+<!--처리현황등록-->
+<div id="ProcReg" data-role="page">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <!--<a href="#" data-rel="back" data-direction="reverse" data-icon="arrow-l" data-iconpos="left"></a>-->
+        <a href="#" id="btnProcReg" data-icon="arrow-l" data-iconpos="left"></a>
+        <h1></h1>
+    </div>
+
+
+    <div id="ProcRegContent"  data-role="main" class="ui-content">
+
+        <div data-inset="true" data-theme="b">
+            <h3>
+                <span data-inline="true">기본정보</span>
+                <button id="btnSaveProc" style="float:right;" data-role="none">저장</button>
+            </h3>
+            <ul  data-role="listview" data-icon="false" >
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title">처리상태</div>
+
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-mini">
+                            <label for="DISPSTAT_CD_01">처리완료</label>
+                            <input type="radio" name="DISPSTAT_CD" id="DISPSTAT_CD_01" value="C" >
+                            <label for="DISPSTAT_CD_02">진행중</label>
+                            <input type="radio" name="DISPSTAT_CD" id="DISPSTAT_CD_02" value="I">
+                        </fieldset>
+                    </div>
+                </li>
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title">모델명</div>
+                        <input id='PROD_NM' type="text" data-corners="false" class="ui-mini"/>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-label">
+                        <div class="ui-label-title">처리일시</div>
+                        <input id="DISP_DD1" value="" type="text" data-corners="false" class="ui-mini"/>
+                        <input type="time" data-clear-btn="true" id="DISP_DD2" value="" class="ui-mini">
+                    </div>
+                </li>
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title">처리건수</div>
+                        <input id='PROC_CNT' type="number" data-corners="false" class="ui-mini"/>
+                        <div class="ui-label-title">제조번호</div>
+                        <input id='PROD_NO' type="text" data-corners="false" class="ui-mini"/>
+                    </div>
+                </li>
+                <li >
+                    <div class="ui-label">
+                        <div class="ui-label-title">자산번호</div>
+                        <input id='ASSET_NO' type="text" data-corners="false" class="ui-mini"/>
+                        <div class="ui-label-title">기타</div>
+                        <input id='PROD_ETC' type="text" data-corners="false" class="ui-mini"/>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <a id="DISPTYP_CD" class="ui-btn ui-body-inherit " data-corners="false" href="#DISPTYP_CD_Popup" data-rel="popup" data-position-to="window" data-transition="pop" style="padding: .3em 1em!important;" ></a>
+                            <div data-role="popup" id="DISPTYP_CD_Popup" data-overlay-theme="c"></div>
+                            <a id="DISP_CD2" class="ui-btn ui-body-inherit " data-corners="false" href="#DISP_CD2_Popup" data-rel="popup" data-position-to="window" data-transition="pop" style="padding: .3em 1em!important;" ></a>
+                            <div data-role="popup" id="DISP_CD2_Popup" data-overlay-theme="c"></div>
+                            <!--
+                                <select name="DISPTYP_CD" id="DISPTYP_CD" data-mini="true" data-native-menu="false">
+                                </select>
+                                <select name="DISP_CD2" id="DISP_CD2" data-mini="true" data-native-menu="false">
+                                </select>
+                            -->
+                        </div>
+                        <div class="ui-block-b">
+                            <a id="SPT_CD" class="ui-btn ui-body-inherit " data-corners="false" href="#SPT_CD_Popup" data-rel="popup" data-position-to="window" data-transition="pop" style="padding: .3em 1em!important;" ></a>
+                            <div data-role="popup" id="SPT_CD_Popup" data-overlay-theme="c"></div>
+                            <a id="DISP_CD" class="ui-btn ui-body-inherit " data-corners="false" href="#DISP_CD_Popup" data-rel="popup" data-position-to="window" data-transition="pop" style="padding: .3em 1em!important;" ></a>
+                            <div data-role="popup" id="DISP_CD_Popup" data-overlay-theme="c"></div>
+                            <!--
+                                <select name="SPT_CD" id="SPT_CD" data-mini="true" data-native-menu="false">
+                                </select>
+                                <select name="DISP_CD" id="DISP_CD" data-mini="true" data-native-menu="false">
+                                </select>
+                            -->
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div id="RstlCol"  data-role="main" class="ui-content">
+        <div data-inset="true" data-theme="b">
+
+            <h3>
+                <span data-inline="true">조치결과</span>
+                <button id="btnSaveRslt" style="float:right;" data-role="none">저장</button>
+            </h3>
+
+            <ul  id="RstlList" data-role="listview" data-icon="false" >
+            </ul>
+
+        </div>
+    </div>
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li><a   href="#Main" data-icon="home">Home</a></li>
+                <li><a     href="#" onclick="goNotDone();" data-icon="employee" class="ui-btn-active ui-state-persist">미처리현황</a></li>
+                <li><a     href="#" onclick="goDone();"  data-icon="attendance">처리완료현황</a></li>
+                <li><a     href="#" onclick="goAsst();"   data-icon="photo">자산실사</a></li>
+                <li><a   href="#Login" data-icon="setting">로그아웃</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+

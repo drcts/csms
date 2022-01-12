@@ -1,0 +1,70 @@
+<div id="AsstGJList" data-role="page">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <!--<a href="#" data-rel="back" data-direction="reverse" data-icon="arrow-l" data-iconpos="left"></a>-->
+        <a href="#" id="btnAsstGJList" data-icon="arrow-l" data-iconpos="left"></a>
+        <h1>회사 - 지점</h1>
+    </div>
+    <div role="main" class="ui-content main_content" >
+<!--        <div class="search-group"  style="margin-bottom:0px!important;" data-inline="true">-->
+<!--            <input id="txtPcSn" style="width:80%;" type="text" data-clear-btn="true" placeholder="SN 검색"/>-->
+<!--            <a href="#" id="btnSnScan" class="ui-btn ui-icon-camera" onclick="fn_list_sn_scan();"></a>-->
+<!--        </div>-->
+        <div class="search-group"  style="margin-bottom:0px!important;" data-inline="true">
+            <input id="txtSearch" style="width:80%;" type="text" data-clear-btn="true" placeholder="자산번호/SN 검색"/>
+            <a href="#" id="btnPcNumScan" class="ui-btn ui-icon-camera ui-btn-icon-left" onclick="fn_list_scan();"></a>
+
+        </div>
+        <div class="search-group"  style="margin-bottom:0px!important;" data-inline="true">
+            <input id="btDoneSearch" type="button" value="검색" data-corners="false" />
+        </div>
+
+        <div class="ui-label">
+            <label class="ui-btn" data-iconpos="left">미실사항목만<input id="resentYn" type="checkbox" checked ></label><label class="ui-label" >(총 : <span class="ui-span" id="spnTot" ></span>건, 실사완료 : <span class="ui-span" id="spnYTot" ></span>건, 미실사 : <span class="ui-span" id="spnNTot" ></span>건)</label>
+            <h3>
+                <span id="pageInfo" style="color:cornflowerblue"></span>
+                <button id="btAsstAdd" style="float:right;" data-role="none">자산추가</button>
+            </h3>
+        </div>
+
+        <div class="search-group">
+            <table data-role="table" data-mode="columntoggle:none" class="ui-responsive" id="myTable">
+                <thead>
+                <tr>
+                    <th data-priority="1" style="width:50%;">자산번호</th>
+                    <th data-priority="2" style="width:40%;">SN</th>
+                </tr>
+                <tr>
+                    <th data-priority="1" >장비구분</th>
+                    <th data-priority="2" >모델명</th>
+                </tr>
+                <tr>
+                    <th data-priority="1" >부서</th>
+                    <th data-priority="2" >사용자</th>
+                </tr>
+                <tr>
+                    <th data-priority="1" colspan="2">상태</th>
+                </tr>
+                </thead>
+                <tbody id="AsstGijumlistview">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="ui-label" style="padding-bottom:50px">
+            <button id="btGijumEnd" class="ui-btn ui-btn-b ui-corner-all ui-icon-arrow-r ui-btn-icon-right" onclick="GijumEnd();">지점실사종료</button>
+        </div>
+
+    </div>
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li><a   href="#Main" data-icon="home">Home</a></li>
+                <li><a   href="#" onclick="goNotDone();"  data-icon="employee">미처리현황</a></li>
+                <li><a   href="#" onclick="goDone();"   data-icon="attendance">처리완료현황</a></li>
+                <li><a   href="#" onclick="goAsst();"   data-icon="photo" class="ui-btn-active ui-state-persist">자산실사</a></li>
+                <li><a   href="#Login" data-icon="setting">로그아웃</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

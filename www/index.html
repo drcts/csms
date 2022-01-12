@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.flatui.css" />
+    <!--<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />-->
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/page.css" />
+    <link rel="stylesheet" type="text/css" href="css/mobipick.css" />
+    <link rel="stylesheet" type="text/css" href="css/jquery.toast.min.css" />
+    <style type="text/css">
+        #btnGrp{
+			position: absolute;
+			width: 90%;
+			text-align: -webkit-center;
+			top: 50%;
+			transform: translateY(-50%);
+        }
+        #btnGrp>a{
+            width: 200px;
+        }
+    </style>
+
+    <script type="text/javascript" src="cordova.js" charset="utf-8" ></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+<!--    <script type="text/javascript" src="js/jquery-3.5.1.js"></script>-->
+<!--    <script type="text/javascript" src="js/jquery-2.x-git.js"></script>-->
+    <script type="text/javascript" src="js/cmm/common.js"></script>
+    <script type="text/javascript" src="js/cmm/util.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile.js"></script>
+<!--    <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>-->
+
+    <script type="text/javascript" src="js/xdate.js"></script>
+    <script type="text/javascript" src="js/xdate.i18n.js"></script>
+    <script type="text/javascript" src="js/mobipick.js"></script>
+    <script type="text/javascript" src="js/clipboard.min.js"></script>
+    <script type="text/javascript" src="js/jquery.toast.min.js"></script>
+
+    <script type="text/javascript" src="js/page/Login.js"></script>
+    <script type="text/javascript" src="js/page/Main.js"></script>
+    <script type="text/javascript" src="js/page/NotDoneList.js"></script>
+    <script type="text/javascript" src="js/page/DoneList.js"></script>
+    <script type="text/javascript" src="js/page/ReqCtnt.js"></script>
+    <script type="text/javascript" src="js/page/Setting.js"></script>
+    <script type="text/javascript" src="js/page/ProcReg.js"></script>
+    <script type="text/javascript" src="js/page/Visit.js"></script>
+    <script type="text/javascript" src="js/page/ReqMat.js"></script>
+    <script type="text/javascript" src="js/page/UseMat.js"></script>
+    <script type="text/javascript" src="js/page/RefPhoto.js"></script>
+    <script type="text/javascript" src="js/page/RclDev.js"></script>
+    <script type="text/javascript" src="js/page/CfmSign.js"></script>
+    <script type="text/javascript" src="js/page/AsstMain.js"></script>
+    <script type="text/javascript" src="js/page/AsstGJList.js"></script>
+    <script type="text/javascript" src="js/page/AsstInfo.js"></script>
+    <script type="text/javascript" src="js/page/AsstReg.js"></script>
+    <script type="text/javascript" src="js/page/AsstGJSign.js"></script>
+    <script type="text/javascript" src="js/page/AsstInfo_P.js"></script>
+    <script type="text/javascript" src="js/page/AsstReg_P.js"></script>
+    <script type="text/javascript" src="js/page/WSInstCtnt.js"></script>
+    <script type="text/javascript" src="js/page/WSInstSign.js"></script>
+    <script type="text/javascript" src="js/page/AsstChgMain.js"></script>
+    <script type="text/javascript" src="js/page/AsstGJChgList.js"></script>
+    <script type="text/javascript" src="js/page/AsstChgInfo_P.js"></script>
+    <script type="text/javascript" src="js/page/ShapCtnt.js"></script>
+
+    <script type="text/javascript" src="js/cmm/ws.js"></script>
+
+    <title>DRCTS CSMS 모바일 앱</title>
+</head>
+<body class="theme">
+<div id="Ready" data-role="page">
+</div>
+
+<!-- 로그인 페이지 -->
+<div id="Login" data-role="page" >
+    <div id="divTitle" class="ui-login-title" style="padding-top:30px;">DRCTS<br>장애처리 시스템</div>
+    <div class="ui-login-loginbox" data-corners="true" >
+        <input id="txUserId" type="text" placeholder="아이디를 입력하세요." value="" data-clear-btn="true" data-corners="true">
+        <input id="txUserPW" type="password" placeholder="비밀번호를 입력하세요." value="" data-clear-btn="true" data-corners="true">
+        <label class="ui-btn" data-iconpos="left">ID/Password 저장<input id="cbSaveInfo" type="checkbox"></label>
+        <label class="ui-btn" data-iconpos="left">자동 로그인<input id="cbAutoLogin" type="checkbox"></label>
+        <button id="btLogin" data-corners="true">로그인</button>
+    </div>
+    <div class="ui-copyright">Copyright ⓒ 2017 by DRCTS_<span id='spnTtl'></span></div>
+</div>
+
+
+
+<!-- 메인 페이지 -->
+<div id="Main" data-role="page" >
+    <div class="ui-main-title">장애처리 시스템</div>
+
+    <div data-role="content" id="btnGrp">
+        <a href="#" onclick="goNotDone0();" data-role="button" > 미처리현황</a>
+        <a href="#" onclick="goDone0();" data-role="button"> 처리완료현황</a>
+        <a href="#" onclick="goAsst0();" data-role="button"> 자산실사</a>
+        <a href="#" onclick="goChange0();" data-role="button"> 자산신규설치</a>
+    </div>
+
+    <div class="ui-copyright">Copyright ⓒ 2017 by DRCTS</div>
+</div>
+
+
+
+
+
+</body>
+</html>
