@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.drcts.csms"
     android:hardwareAccelerated="true"
-    android:versionCode="10044"
-    android:versionName="1.44">
+    android:versionCode="10045"
+    android:versionName="1.45">
 
     <supports-screens
         android:anyDensity="true"

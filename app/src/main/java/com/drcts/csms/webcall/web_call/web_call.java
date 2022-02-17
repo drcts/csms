@@ -97,7 +97,7 @@ public class web_call extends CordovaPlugin {
             try{
                 cordova.getContext().stopService(it);
             }catch(Exception e){
-                Log.d("CSMS","서비스 중지실패...");
+                Log.d("CSMS","PrintSetService 중지실패...");
             }
             //            try {
             //                Thread.sleep(3000);
@@ -107,7 +107,7 @@ public class web_call extends CordovaPlugin {
             try{
                 cordova.getContext().startService(it);
             }catch(Exception e){
-                Log.d("CSMS","서비스 중지실패...");
+                Log.d("CSMS","PrintSetService 시작실패...");
             }
             // 서비스를 시작했기때문에 프린터를 바로 날리지않도록 N리턴 - 출력버튼은 한번더 누르도록 유도함
             callbackContext.success("N");
@@ -119,9 +119,11 @@ public class web_call extends CordovaPlugin {
         else if (action.equals("printMethod")) {
             String barcode = "";
             String comNm = "";
+            String jumNm = "";
             try{
                 barcode = (String) args.getJSONArray(0).get(0);
                 comNm = (String) args.getJSONArray(0).get(1);
+                jumNm = (String) args.getJSONArray(0).get(2);
 
             }catch(Exception e){
 
@@ -130,7 +132,7 @@ public class web_call extends CordovaPlugin {
 
             if(PrintSetService.mJCAPI != null && PrintSetService.mJCAPI.isConnection() == 0 ){
                 // 프린터 연결됨
-                PrintSetService.printLabel(barcode, comNm);
+                PrintSetService.printLabel(barcode, comNm, jumNm);
             }
             else{
                 //프린터설정 페이지 안내메세지

@@ -409,9 +409,10 @@ var fn_qr_print = function () {
 //qr프린트
 var fn_qr_print_callback = function () {
     var pcNum = $('#txtPcNum').val();
-    var comNm = GetComNm()+" - "+GetGijumNm();
+    var comNm = GetComNm();
+    var jumNm = GetGijumNm();
 
-    cordova.plugins.web_call.printMethod([pcNum, comNm],function(ret){
+    cordova.plugins.web_call.printMethod([pcNum, comNm, jumNm],function(ret){
         //alert('printMethod success - ' + ret);
     },function(err){
         alert('프린터 설정화면에서 프린터를 연결하세요.');

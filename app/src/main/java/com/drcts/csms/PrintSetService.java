@@ -182,7 +182,7 @@ public class PrintSetService extends Service {
          */
         mJCAPI = JCAPI.getInstance(mCallback);
 
-        //저장된 장치가 없으면 서비스중지
+        //이전에 저장된 장치가 없으면 프린터연결 안함
         if( deviceAddress == null || deviceAddress == ""){
             return super.onStartCommand(intent, flags, startId);
         }
@@ -240,7 +240,7 @@ public class PrintSetService extends Service {
     /**
      * 打印标签 라벨인쇄
      */
-    public static void printLabel(String barcode, String comNm) {
+    public static void printLabel(String barcode, String comNm, String jumNm) {
         int itype=mJCAPI.getLabelType();
         Log.d("CSMS", "打印测试-取消打印-异常回调: itype - " + itype); //인쇄 테스트 취소 인쇄 비정상 콜백
 
@@ -270,11 +270,18 @@ public class PrintSetService extends Service {
 
             mJCAPI.drawQrCode(barcode,2,7,14,0);
 
-            mJCAPI.drawText(barcode, 17, 2, 35, 18
+            mJCAPI.drawText("[ " +comNm+ " ]", 17, 3, 35, 12
                     , 4, 0.0, 1.0F, (byte) 0x01
                     , 0, 0, false, "");
-            mJCAPI.drawText(comNm, 17, 10, 35, 10
+            mJCAPI.drawText(jumNm, 17, 10, 35, 7
+                    , 3.5, 0.0, 1.0F, (byte) 0x01
+                    , 0, 0, false, "");
+            mJCAPI.drawText(barcode, 17, 16, 35, 6
                     , 3, 0.0, 1.0F, (byte) 0x01
+                    , 0, 0, false, "");
+
+            mJCAPI.drawText("서비스접수 : 1566-2944", 2, 20, 50, 10
+                    , 4, 0.0, 1.0F, (byte) 0x01
                     , 0, 0, false, "");
 
             mJCAPI.endPage();
